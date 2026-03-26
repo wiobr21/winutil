@@ -13461,7 +13461,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
+
+
+
 
 
 
@@ -13469,7 +13477,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+
+
+
 
 
 
@@ -13477,7 +13493,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         xmlns:local="clr-namespace:WinUtility"
+
+
+
+
 
 
 
@@ -13485,7 +13509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         WindowStartupLocation="CenterScreen"
+
+
+
+
 
 
 
@@ -13493,7 +13525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         WindowStyle="None"
+
+
+
+
 
 
 
@@ -13501,7 +13541,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         Height="自动"
+
+
+
+
 
 
 
@@ -13509,7 +13557,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         MinHeight="600"
+
+
+
+
 
 
 
@@ -13517,7 +13573,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     <WindowChrome.WindowChrome>
+
+
+
+
 
 
 
@@ -13525,7 +13589,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     </WindowChrome.WindowChrome>
+
+
+
+
 
 
 
@@ -13533,7 +13605,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     <Style TargetType="ToolTip">
+
+
+
+
 
 
 
@@ -13541,7 +13621,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -13549,7 +13637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="MaxWidth" Value="{DynamicResource ToolTipWidth}"/>
+
+
+
+
 
 
 
@@ -13557,7 +13653,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Padding" Value="2"/>
+
+
+
+
 
 
 
@@ -13565,7 +13669,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -13573,7 +13685,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="ContentTemplate">
+
+
+
+
 
 
 
@@ -13581,7 +13701,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <DataTemplate>
+
+
+
+
 
 
 
@@ -13589,7 +13717,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <ContentPresenter.Resources>
+
+
+
+
 
 
 
@@ -13597,7 +13733,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="TextWrapping" Value="Wrap"/>
+
+
+
+
 
 
 
@@ -13605,7 +13749,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ContentPresenter.Resources>
+
+
+
+
 
 
 
@@ -13613,7 +13765,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </DataTemplate>
+
+
+
+
 
 
 
@@ -13621,11 +13781,27 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Setter>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -13637,7 +13813,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -13645,7 +13829,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+
+
+
+
 
 
 
@@ -13653,7 +13845,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Padding" Value="5,2,5,2"/>
+
+
+
+
 
 
 
@@ -13661,7 +13861,19 @@ $inputXML = @'
 
 
 
+
+
+
+
     </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -13673,7 +13885,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+
+
+
+
 
 
 
@@ -13681,7 +13901,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter.Value>
+
+
+
+
 
 
 
@@ -13689,7 +13917,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Grid x:Name="Grid">
+
+
+
+
 
 
 
@@ -13697,7 +13933,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Border x:Name="Rectangle1" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="自动" Height="自动"  Background="{TemplateBinding Background}" />
+
+
+
+
 
 
 
@@ -13705,7 +13949,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -13713,7 +13965,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter TargetName="Rectangle1" Property="Width" Value="自动" />
+
+
+
+
 
 
 
@@ -13721,7 +13981,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
 
 
 
@@ -13729,7 +13997,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </ControlTemplate>
+
+
+
+
 
 
 
@@ -13737,11 +14013,27 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Setter>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -13753,7 +14045,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Foreground" Value="{DynamicResource LinkForegroundColor}" />
+
+
+
+
 
 
 
@@ -13761,7 +14061,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Style.Triggers>
+
+
+
+
 
 
 
@@ -13769,7 +14077,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter Property="Foreground" Value="{DynamicResource LinkHoverForegroundColor}" />
+
+
+
+
 
 
 
@@ -13777,7 +14093,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter Property="Cursor" Value="Hand" />
+
+
+
+
 
 
 
@@ -13785,11 +14109,23 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style.Triggers>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
 
 
 
@@ -13797,7 +14133,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="BorderBrush" Value="Gray"/>
+
+
+
+
 
 
 
@@ -13805,7 +14149,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="CornerRadius" Value="2"/>
+
+
+
+
 
 
 
@@ -13813,7 +14165,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Width" Value="{DynamicResource AppEntryWidth}"/>
+
+
+
+
 
 
 
@@ -13821,7 +14181,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Margin" Value="{DynamicResource AppEntryMargin}"/>
+
+
+
+
 
 
 
@@ -13829,11 +14197,23 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Background" Value="{DynamicResource App安装UnselectedColor}"/>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
 
 
 
@@ -13841,7 +14221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Background" Value="Transparent"/>
+
+
+
+
 
 
 
@@ -13849,7 +14237,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="VerticalAlignment" Value="Center"/>
+
+
+
+
 
 
 
@@ -13857,11 +14253,23 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Template">
 
 
 
+
+
+
+
             <Setter.Value>
+
+
+
+
 
 
 
@@ -13869,7 +14277,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <StackPanel Orientation="Horizontal">
+
+
+
+
 
 
 
@@ -13877,7 +14293,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Border x:Name="CheckBoxBorder"
+
+
+
+
 
 
 
@@ -13885,7 +14309,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     Background="{DynamicResource ButtonBackgroundColor}"
+
+
+
+
 
 
 
@@ -13893,7 +14325,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     Width="12"
+
+
+
+
 
 
 
@@ -13901,7 +14341,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     CornerRadius="2"/>
+
+
+
+
 
 
 
@@ -13909,7 +14357,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                   Stroke="{DynamicResource ToggleButtonOnColor}"
+
+
+
+
 
 
 
@@ -13917,7 +14373,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                   Data="M 2 8 L 6 12 L 14 4"
+
+
+
+
 
 
 
@@ -13925,7 +14389,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
 
 
 
@@ -13933,7 +14405,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -13941,7 +14421,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </StackPanel>
+
+
+
+
 
 
 
@@ -13949,7 +14437,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Trigger Property="IsChecked" Value="True">
+
+
+
+
 
 
 
@@ -13957,7 +14453,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
 
 
 
@@ -13965,7 +14469,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </ControlTemplate>
+
+
+
+
 
 
 
@@ -13973,11 +14485,23 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Setter>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
 
 
 
@@ -13985,7 +14509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="FontSize" Value="{DynamicResource AppEntryFontSize}"/>
+
+
+
+
 
 
 
@@ -13993,7 +14525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -14001,7 +14541,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Margin" Value="{DynamicResource AppEntryMargin}"/>
+
+
+
+
 
 
 
@@ -14009,7 +14557,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     </Style>
+
+
+
+
 
 
 
@@ -14017,7 +14573,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Width" Value="{DynamicResource IconButtonSize}"/>
+
+
+
+
 
 
 
@@ -14025,7 +14589,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Margin" Value="{DynamicResource AppEntryMargin}"/>
+
+
+
+
 
 
 
@@ -14033,7 +14605,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -14041,7 +14621,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="VerticalAlignment" Value="Center"/>
+
+
+
+
 
 
 
@@ -14049,7 +14637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter.Value>
+
+
+
+
 
 
 
@@ -14057,7 +14653,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <TextBlock  Text="{Binding}"
+
+
+
+
 
 
 
@@ -14065,7 +14669,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 FontSize="{DynamicResource IconFontSize}"
+
+
+
+
 
 
 
@@ -14073,7 +14685,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </DataTemplate>
+
+
+
+
 
 
 
@@ -14081,7 +14701,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Setter>
+
+
+
+
 
 
 
@@ -14089,7 +14717,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -14097,7 +14733,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid>
+
+
+
+
 
 
 
@@ -14105,7 +14749,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -14113,7 +14765,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     BorderThickness="{DynamicResource ButtonBorderThickness}"
+
+
+
+
 
 
 
@@ -14121,7 +14781,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+
+
 
 
 
@@ -14129,7 +14797,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
 
 
 
@@ -14137,7 +14813,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsPressed" Value="True">
+
+
+
+
 
 
 
@@ -14145,7 +14829,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -14153,7 +14845,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Cursor" Value="Hand"/>
+
+
+
+
 
 
 
@@ -14161,7 +14861,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -14169,7 +14877,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource ButtonBackgroundSelectedColor}"/>
+
+
+
+
 
 
 
@@ -14177,7 +14893,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -14185,11 +14909,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -14205,7 +14941,23 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     </Style>
+
+
+
+
 
 
 
@@ -14213,7 +14965,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}" />
+
+
+
+
 
 
 
@@ -14221,7 +14981,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="FontSize" Value="{DynamicResource ButtonFontSize}" />
+
+
+
+
 
 
 
@@ -14229,7 +14997,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}" />
+
+
+
+
 
 
 
@@ -14237,7 +15013,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter.Value>
+
+
+
+
 
 
 
@@ -14245,7 +15029,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Border Background="{TemplateBinding Background}">
+
+
+
+
 
 
 
@@ -14253,7 +15045,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Border>
+
+
+
+
 
 
 
@@ -14261,7 +15061,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -14269,7 +15077,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}" />
+
+
+
+
 
 
 
@@ -14277,7 +15093,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
 
 
 
@@ -14285,7 +15109,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </ControlTemplate>
+
+
+
+
 
 
 
@@ -14293,11 +15125,27 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Setter>
 
 
 
+
+
+
+
     </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -14309,7 +15157,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+
+
+
+
 
 
 
@@ -14317,7 +15173,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Foreground" Value="{DynamicResource ScrollBarBackgroundColor}" />
+
+
+
+
 
 
 
@@ -14325,7 +15189,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Setter Property="Width" Value="6" />
+
+
+
+
 
 
 
@@ -14333,7 +15205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter.Value>
+
+
+
+
 
 
 
@@ -14341,7 +15221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Grid x:Name="GridRoot" Width="7" Background="{TemplateBinding Background}" >
+
+
+
+
 
 
 
@@ -14349,11 +15237,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <RowDefinition Height="0.00001*" />
 
 
 
+
+
+
+
                         </Grid.RowDefinitions>
+
+
+
+
+
+
+
+
 
 
 
@@ -14365,7 +15269,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Track.Thumb>
+
+
+
+
 
 
 
@@ -14373,7 +15285,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Track.Thumb>
+
+
+
+
 
 
 
@@ -14381,7 +15301,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+
+
+
+
 
 
 
@@ -14389,7 +15317,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Track.DecreaseRepeatButton>
+
+
+
+
 
 
 
@@ -14397,7 +15333,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Track.DecreaseRepeatButton>
+
+
+
+
 
 
 
@@ -14405,7 +15349,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -14417,7 +15373,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+
+
+
+
 
 
 
@@ -14425,7 +15389,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
 
 
 
@@ -14433,11 +15405,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter Value="{DynamicResource ScrollBarDraggingColor}" TargetName="Thumb" Property="Background" />
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
+
+
+
+
 
 
 
@@ -14449,11 +15437,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
 
 
 
+
+
+
+
                         </Trigger>
+
+
+
+
 
 
 
@@ -14461,7 +15461,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter TargetName="GridRoot" Property="LayoutTransform">
+
+
+
+
 
 
 
@@ -14469,7 +15477,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <RotateTransform Angle="-90" />
+
+
+
+
 
 
 
@@ -14477,7 +15493,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Setter>
+
+
+
+
 
 
 
@@ -14485,7 +15509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter.Value>
+
+
+
+
 
 
 
@@ -14493,7 +15525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Setter.Value>
+
+
+
+
 
 
 
@@ -14501,7 +15541,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter Property="Width" Value="自动" />
+
+
+
+
 
 
 
@@ -14509,7 +15557,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+
+
+
+
 
 
 
@@ -14517,7 +15573,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+
+
+
+
 
 
 
@@ -14525,7 +15589,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -14533,7 +15605,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter.Value>
+
+
+
+
 
 
 
@@ -14541,7 +15621,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -14549,7 +15637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundColor}" />
+
+
+
+
 
 
 
@@ -14557,7 +15653,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="MinWidth"   Value="{DynamicResource ButtonWidth}" />
+
+
+
+
 
 
 
@@ -14565,7 +15669,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -14573,7 +15685,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid>
+
+
+
+
 
 
 
@@ -14581,7 +15701,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     BorderBrush="{DynamicResource BorderColor}"
+
+
+
+
 
 
 
@@ -14589,7 +15717,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     CornerRadius="{DynamicResource ButtonCornerRadius}"
+
+
+
+
 
 
 
@@ -14597,7 +15733,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <ToggleButton x:Name="ToggleButton"
+
+
+
+
 
 
 
@@ -14605,7 +15749,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               BorderThickness="0"
+
+
+
+
 
 
 
@@ -14613,7 +15765,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               ClickMode="Press">
+
+
+
+
 
 
 
@@ -14621,7 +15781,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -14629,7 +15797,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <ColumnDefinition Width="自动"/>
+
+
+
+
 
 
 
@@ -14637,7 +15813,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBlock Grid.Column="0"
+
+
+
+
 
 
 
@@ -14645,7 +15829,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    Foreground="{TemplateBinding Foreground}"
+
+
+
+
 
 
 
@@ -14653,7 +15845,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    HorizontalAlignment="Left" VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -14661,7 +15861,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Path Grid.Column="1"
+
+
+
+
 
 
 
@@ -14669,7 +15877,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               Fill="{TemplateBinding Foreground}"
+
+
+
+
 
 
 
@@ -14677,7 +15893,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -14685,7 +15909,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               Stretch="Uniform"
+
+
+
+
 
 
 
@@ -14693,7 +15925,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </Grid>
+
+
+
+
 
 
 
@@ -14701,7 +15941,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Border>
+
+
+
+
 
 
 
@@ -14709,7 +15957,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
+
+
+
+
 
 
 
@@ -14717,7 +15973,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                    Focusable="False"
+
+
+
+
 
 
 
@@ -14725,7 +15989,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                    PopupAnimation="Slide">
+
+
+
+
 
 
 
@@ -14733,7 +16005,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -14741,7 +16021,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         BorderThickness="1"
+
+
+
+
 
 
 
@@ -14749,7 +16037,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <ScrollViewer>
+
+
+
+
 
 
 
@@ -14757,7 +16053,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </ScrollViewer>
+
+
+
+
 
 
 
@@ -14765,7 +16069,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Popup>
+
+
+
+
 
 
 
@@ -14773,7 +16085,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -14781,11 +16101,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -14793,7 +16125,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource LabelboxForegroundColor}"/>
+
+
+
+
 
 
 
@@ -14801,11 +16141,27 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -14817,7 +16173,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Style TargetType="TextBlock">
+
+
+
+
 
 
 
@@ -14825,7 +16189,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource LabelboxForegroundColor}"/>
+
+
+
+
 
 
 
@@ -14833,7 +16205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -14841,11 +16221,23 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Style TargetType="{x:Type ToggleButton}">
 
 
 
+
+
+
+
             <Setter Property="Margin" Value="{DynamicResource ButtonMargin}"/>
+
+
+
+
 
 
 
@@ -14853,7 +16245,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -14861,7 +16261,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -14869,7 +16277,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid>
+
+
+
+
 
 
 
@@ -14877,7 +16293,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -14885,11 +16309,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         BorderThickness="{DynamicResource ButtonBorderThickness}"
 
 
 
+
+
+
+
                                         CornerRadius="{DynamicResource ButtonCornerRadius}">
+
+
+
+
 
 
 
@@ -14897,7 +16333,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Border x:Name="BackgroundBorder"
+
+
+
+
 
 
 
@@ -14905,7 +16349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         BorderBrush="{DynamicResource ButtonBackgroundColor}"
+
+
+
+
 
 
 
@@ -14913,7 +16365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         CornerRadius="{DynamicResource ButtonCornerRadius}">
+
+
+
+
 
 
 
@@ -14921,7 +16381,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             HorizontalAlignment="Center"
+
+
+
+
 
 
 
@@ -14929,7 +16397,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Margin="10,2,10,2"/>
+
+
+
+
 
 
 
@@ -14937,7 +16413,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Grid>
+
+
+
+
 
 
 
@@ -14945,7 +16429,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
 
 
 
@@ -14953,7 +16445,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -14961,11 +16461,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Effect">
 
 
 
+
+
+
+
                                     <Setter.Value>
+
+
+
+
 
 
 
@@ -14973,11 +16485,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </Setter.Value>
 
 
 
+
+
+
+
                                 </Setter>
+
+
+
+
 
 
 
@@ -14985,7 +16509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -14993,7 +16525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="BorderBrush" Value="Pink"/>
+
+
+
+
 
 
 
@@ -15001,7 +16541,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource ButtonBackgroundSelectedColor}"/>
+
+
+
+
 
 
 
@@ -15009,7 +16557,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Setter.Value>
+
+
+
+
 
 
 
@@ -15017,7 +16573,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </Setter.Value>
+
+
+
+
 
 
 
@@ -15025,7 +16589,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -15033,7 +16605,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="BorderBrush" Value="Transparent"/>
+
+
+
+
 
 
 
@@ -15041,7 +16621,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -15049,7 +16637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -15057,11 +16653,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -15069,7 +16677,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Style TargetType="Button">
+
+
+
+
 
 
 
@@ -15077,7 +16693,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundColor}"/>
+
+
+
+
 
 
 
@@ -15085,7 +16709,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Height" Value="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -15093,7 +16725,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontSize" Value="{DynamicResource ButtonFontSize}"/>
+
+
+
+
 
 
 
@@ -15101,7 +16741,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
+
+
+
+
 
 
 
@@ -15109,7 +16757,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ControlTemplate TargetType="Button">
+
+
+
+
 
 
 
@@ -15117,7 +16773,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Border x:Name="BackgroundBorder"
+
+
+
+
 
 
 
@@ -15125,7 +16789,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     BorderBrush="{TemplateBinding BorderBrush}"
+
+
+
+
 
 
 
@@ -15133,7 +16805,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     CornerRadius="{DynamicResource ButtonCornerRadius}">
+
+
+
+
 
 
 
@@ -15141,7 +16821,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Border>
+
+
+
+
 
 
 
@@ -15149,7 +16837,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -15157,11 +16853,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource ButtonBackgroundPressedColor}"/>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -15169,11 +16877,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource ButtonBackgroundMouseoverColor}"/>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -15181,7 +16901,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource ButtonBackgroundSelectedColor}"/>
+
+
+
+
 
 
 
@@ -15189,7 +16917,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -15197,7 +16933,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -15205,11 +16949,27 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -15221,7 +16981,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Margin" Value="{DynamicResource ButtonMargin}"/>
+
+
+
+
 
 
 
@@ -15229,7 +16997,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Background" Value="{DynamicResource ButtonBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -15237,7 +17013,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Width" Value="{DynamicResource ButtonWidth}"/>
+
+
+
+
 
 
 
@@ -15245,7 +17029,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -15253,7 +17045,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -15261,7 +17061,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid>
+
+
+
+
 
 
 
@@ -15269,7 +17077,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -15277,7 +17093,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     BorderThickness="{DynamicResource ButtonBorderThickness}"
+
+
+
+
 
 
 
@@ -15285,7 +17109,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Grid>
+
+
+
+
 
 
 
@@ -15293,7 +17125,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Ellipse Width="8" Height="16"
+
+
+
+
 
 
 
@@ -15301,11 +17141,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             HorizontalAlignment="Right"
 
 
 
+
+
+
+
                                             VerticalAlignment="Top"
+
+
+
+
 
 
 
@@ -15317,7 +17169,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                     <!-- Toggle Dot with hover grow effect -->
+
+
+
+
 
 
 
@@ -15325,7 +17189,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Width="8" Height="8"
+
+
+
+
 
 
 
@@ -15333,7 +17205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             HorizontalAlignment="Right"
+
+
+
+
 
 
 
@@ -15341,7 +17221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Margin="0,3,5,0"
+
+
+
+
 
 
 
@@ -15349,7 +17237,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Ellipse.RenderTransform>
+
+
+
+
 
 
 
@@ -15357,7 +17253,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Ellipse.RenderTransform>
+
+
+
+
 
 
 
@@ -15369,7 +17273,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                     <!-- Content Presenter -->
+
+
+
+
 
 
 
@@ -15377,7 +17293,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -15385,7 +17309,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Grid>
+
+
+
+
 
 
 
@@ -15393,7 +17325,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -15405,7 +17349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -15413,7 +17365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -15421,7 +17381,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Trigger.EnterActions>
+
+
+
+
 
 
 
@@ -15429,7 +17397,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Storyboard>
+
+
+
+
 
 
 
@@ -15437,7 +17413,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <DoubleAnimation Storyboard.TargetName="ToggleDot"
+
+
+
+
 
 
 
@@ -15445,7 +17429,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             To="1.2" Duration="0:0:0.1"/>
+
+
+
+
 
 
 
@@ -15453,7 +17445,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+
+
+
+
 
 
 
@@ -15461,11 +17461,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
 
 
 
+
+
+
+
                                     </BeginStoryboard>
+
+
+
+
 
 
 
@@ -15473,7 +17485,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -15481,7 +17501,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Storyboard>
+
+
+
+
 
 
 
@@ -15489,7 +17517,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <DoubleAnimation Storyboard.TargetName="ToggleDot"
+
+
+
+
 
 
 
@@ -15497,7 +17533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             To="1.0" Duration="0:0:0.1"/>
+
+
+
+
 
 
 
@@ -15505,7 +17549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+
+
+
+
 
 
 
@@ -15513,7 +17565,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
+
+
+
+
 
 
 
@@ -15521,11 +17581,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Trigger.ExitActions>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
+
+
+
+
 
 
 
@@ -15537,7 +17613,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsChecked" Value="True">
+
+
+
+
 
 
 
@@ -15545,11 +17629,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="ToggleDot" Property="Margin" Value="0,0,5,3"/>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
+
+
+
+
 
 
 
@@ -15561,7 +17661,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsEnabled" Value="False">
+
+
+
+
 
 
 
@@ -15569,7 +17677,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Foreground" Value="DimGray"/>
+
+
+
+
 
 
 
@@ -15577,7 +17693,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -15585,7 +17709,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -15593,7 +17725,19 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -15605,7 +17749,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -15613,7 +17765,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Content" Value="X"/>
+
+
+
+
 
 
 
@@ -15621,7 +17781,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Width" Value="{DynamicResource SearchBarClearButtonFontSize}"/>
+
+
+
+
 
 
 
@@ -15629,7 +17797,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -15637,7 +17813,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="BorderBrush" Value="Transparent"/>
+
+
+
+
 
 
 
@@ -15645,7 +17829,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Style.Triggers>
+
+
+
+
 
 
 
@@ -15653,7 +17845,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Setter Property="Foreground" Value="Red"/>
+
+
+
+
 
 
 
@@ -15661,7 +17861,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Setter Property="BorderThickness" Value="10"/>
+
+
+
+
 
 
 
@@ -15669,7 +17877,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Trigger>
+
+
+
+
 
 
 
@@ -15677,7 +17893,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -15685,7 +17909,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <Style TargetType="CheckBox">
+
+
+
+
 
 
 
@@ -15693,7 +17925,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -15701,7 +17941,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -15709,7 +17957,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
+
+
+
+
 
 
 
@@ -15717,7 +17973,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ControlTemplate TargetType="CheckBox">
+
+
+
+
 
 
 
@@ -15725,7 +17989,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <BulletDecorator Background="Transparent">
+
+
+
+
 
 
 
@@ -15733,7 +18005,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Grid Width="{DynamicResource CheckBoxBulletDecoratorSize}" Height="{DynamicResource CheckBoxBulletDecoratorSize}">
+
+
+
+
 
 
 
@@ -15741,7 +18021,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 BorderBrush="{TemplateBinding BorderBrush}"
+
+
+
+
 
 
 
@@ -15749,7 +18037,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 BorderThickness="1"
+
+
+
+
 
 
 
@@ -15757,7 +18053,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Height="{DynamicResource CheckBoxBulletDecoratorSize *0.85}"
+
+
+
+
 
 
 
@@ -15765,7 +18069,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 SnapsToDevicePixels="True"/>
+
+
+
+
 
 
 
@@ -15773,7 +18085,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Width="{DynamicResource CheckBoxBulletDecoratorSize}"
+
+
+
+
 
 
 
@@ -15781,7 +18101,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 HorizontalAlignment="Center"
+
+
+
+
 
 
 
@@ -15789,7 +18117,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Visibility="Collapsed">
+
+
+
+
 
 
 
@@ -15797,7 +18133,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   Stroke="{DynamicResource ToggleButtonOnColor}"
+
+
+
+
 
 
 
@@ -15805,7 +18149,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   Data="M 0 5 L 5 10 L 12 0"
+
+
+
+
 
 
 
@@ -15813,7 +18165,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Viewbox>
+
+
+
+
 
 
 
@@ -15821,7 +18181,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </BulletDecorator.Bullet>
+
+
+
+
 
 
 
@@ -15829,11 +18197,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   HorizontalAlignment="Left"
 
 
 
+
+
+
+
                                                   VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -15841,7 +18221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </BulletDecorator>
+
+
+
+
 
 
 
@@ -15849,11 +18237,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <ControlTemplate.Triggers>
 
 
 
+
+
+
+
                             <Trigger Property="IsChecked" Value="True">
+
+
+
+
 
 
 
@@ -15861,11 +18261,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Trigger>
 
 
 
+
+
+
+
                             <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -15873,7 +18285,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Foreground" Value="{DynamicResource ButtonBackgroundPressedColor}"/>
+
+
+
+
 
 
 
@@ -15881,11 +18301,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ControlTemplate.Triggers>
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -15893,11 +18325,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -15905,7 +18349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -15913,7 +18365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+
+
+
+
 
 
 
@@ -15921,11 +18381,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -15933,7 +18405,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <StackPanel Orientation="Horizontal" Margin="{DynamicResource CheckBoxMargin}">
+
+
+
+
 
 
 
@@ -15941,7 +18421,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Grid Width="14" Height="14">
+
+
+
+
 
 
 
@@ -15949,7 +18437,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Stroke="{DynamicResource ToggleButtonOffColor}"
+
+
+
+
 
 
 
@@ -15957,7 +18453,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             StrokeThickness="1"
+
+
+
+
 
 
 
@@ -15965,7 +18469,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Height="14"
+
+
+
+
 
 
 
@@ -15973,7 +18485,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Ellipse x:Name="InnerCircle"
+
+
+
+
 
 
 
@@ -15981,7 +18501,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Width="8"
+
+
+
+
 
 
 
@@ -15989,7 +18517,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Visibility="Collapsed"
+
+
+
+
 
 
 
@@ -15997,7 +18533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             VerticalAlignment="Center"/>
+
+
+
+
 
 
 
@@ -16005,7 +18549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Viewbox>
+
+
+
+
 
 
 
@@ -16013,7 +18565,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -16021,11 +18581,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </StackPanel>
 
 
 
+
+
+
+
                         <ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -16033,11 +18605,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -16045,7 +18629,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="OuterCircle" Property="Stroke" Value="{DynamicResource ToggleButtonOnColor}"/>
+
+
+
+
 
 
 
@@ -16053,7 +18645,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -16061,7 +18661,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -16069,7 +18677,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -16077,7 +18693,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
+
+
+
+
 
 
 
@@ -16085,7 +18709,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ControlTemplate TargetType="CheckBox">
+
+
+
+
 
 
 
@@ -16093,7 +18725,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Grid>
+
+
+
+
 
 
 
@@ -16101,7 +18741,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Height="20"
+
+
+
+
 
 
 
@@ -16109,7 +18757,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         CornerRadius="10"
+
+
+
+
 
 
 
@@ -16117,7 +18773,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 />
+
+
+
+
 
 
 
@@ -16125,7 +18789,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Width="25"
+
+
+
+
 
 
 
@@ -16133,7 +18805,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Background="Black"
+
+
+
+
 
 
 
@@ -16141,11 +18821,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         HorizontalAlignment="Left"
 
 
 
+
+
+
+
                                 />
+
+
+
+
 
 
 
@@ -16153,7 +18845,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   Margin="10,0,0,0"
+
+
+
+
 
 
 
@@ -16161,11 +18861,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   VerticalAlignment="Center"
 
 
 
+
+
+
+
                                 />
+
+
+
+
 
 
 
@@ -16173,7 +18885,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </StackPanel>
+
+
+
+
 
 
 
@@ -16181,11 +18901,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsChecked" Value="false">
 
 
 
+
+
+
+
                                 <Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16193,7 +18925,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <BeginStoryboard x:Name="WPFToggleSwitchRight">
+
+
+
+
 
 
 
@@ -16201,7 +18941,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
+
+
+
+
 
 
 
@@ -16209,7 +18957,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Duration="0:0:0:0"
+
+
+
+
 
 
 
@@ -16217,7 +18973,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     To="28,0,0,0">
+
+
+
+
 
 
 
@@ -16225,7 +18989,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
+
+
+
+
 
 
 
@@ -16233,7 +19005,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16241,7 +19021,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Property="Background"
+
+
+
+
 
 
 
@@ -16249,11 +19037,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 />
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -16261,7 +19061,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16269,7 +19077,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <BeginStoryboard x:Name="WPFToggleSwitchLeft">
+
+
+
+
 
 
 
@@ -16277,7 +19093,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
+
+
+
+
 
 
 
@@ -16285,7 +19109,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Duration="0:0:0:0"
+
+
+
+
 
 
 
@@ -16293,7 +19125,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     To="0,0,0,0">
+
+
+
+
 
 
 
@@ -16301,7 +19141,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
+
+
+
+
 
 
 
@@ -16309,7 +19157,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16317,7 +19173,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Property="Background"
+
+
+
+
 
 
 
@@ -16325,7 +19189,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 />
+
+
+
+
 
 
 
@@ -16333,7 +19205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -16341,7 +19221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -16349,7 +19237,19 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -16361,7 +19261,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
+
+
+
+
 
 
 
@@ -16369,7 +19277,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+
+
+
 
 
 
@@ -16381,19 +19297,47 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                         <Grid.ColumnDefinitions>
 
 
 
+
+
+
+
                             <ColumnDefinition Width="自动"/>
 
 
 
+
+
+
+
                             <ColumnDefinition Width="自动"/>
+
+
+
+
 
 
 
                         </Grid.ColumnDefinitions>
+
+
+
+
+
+
+
+
 
 
 
@@ -16405,7 +19349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 BorderThickness="1"
+
+
+
+
 
 
 
@@ -16413,7 +19365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Ellipse x:Name="Ellipse" Fill="{DynamicResource MainForegroundColor}" Stretch="Uniform"
+
+
+
+
 
 
 
@@ -16421,7 +19381,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     HorizontalAlignment="Left" Width="10.8"
+
+
+
+
 
 
 
@@ -16429,7 +19397,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Ellipse.RenderTransform>
+
+
+
+
 
 
 
@@ -16437,7 +19413,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Ellipse.RenderTransform>
+
+
+
+
 
 
 
@@ -16445,11 +19429,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Border>
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -16461,7 +19461,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -16469,7 +19477,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource LinkHoverForegroundColor}"/>
+
+
+
+
 
 
 
@@ -16477,7 +19493,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Panel.ZIndex" Value="1000"/>
+
+
+
+
 
 
 
@@ -16485,7 +19509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <BeginStoryboard>
+
+
+
+
 
 
 
@@ -16493,7 +19525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <DoubleAnimation Storyboard.TargetName="Ellipse"
+
+
+
+
 
 
 
@@ -16501,7 +19541,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             To="1.1" Duration="0:0:0.1" />
+
+
+
+
 
 
 
@@ -16509,7 +19557,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+
+
+
+
 
 
 
@@ -16517,11 +19573,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
 
 
 
+
+
+
+
                                     </BeginStoryboard>
+
+
+
+
 
 
 
@@ -16529,7 +19597,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16537,11 +19613,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Storyboard>
 
 
 
+
+
+
+
                                             <DoubleAnimation Storyboard.TargetName="Ellipse"
+
+
+
+
 
 
 
@@ -16549,7 +19637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             To="1.0" Duration="0:0:0.1" />
+
+
+
+
 
 
 
@@ -16557,7 +19653,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+
+
+
+
 
 
 
@@ -16565,7 +19669,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
+
+
+
+
 
 
 
@@ -16573,11 +19685,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Trigger.ExitActions>
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
 
 
 
@@ -16585,7 +19709,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MainBackgroundColor}" />
+
+
+
+
 
 
 
@@ -16593,11 +19725,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="Ellipse" Property="Fill" Value="{DynamicResource ToggleButtonOffColor}" />
 
 
 
+
+
+
+
                             </Trigger>
+
+
+
+
+
+
+
+
 
 
 
@@ -16609,11 +19757,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToggleButtonOnColor}" />
 
 
 
+
+
+
+
                                 <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToggleButtonOnColor}" />
+
+
+
+
 
 
 
@@ -16625,7 +19785,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                 <Trigger.EnterActions>
+
+
+
+
 
 
 
@@ -16633,7 +19805,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Storyboard>
+
+
+
+
 
 
 
@@ -16641,7 +19821,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Storyboard.TargetProperty="Margin"
+
+
+
+
 
 
 
@@ -16649,11 +19837,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
 
 
 
+
+
+
+
                                     </BeginStoryboard>
+
+
+
+
 
 
 
@@ -16661,7 +19861,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16669,7 +19877,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Storyboard>
+
+
+
+
 
 
 
@@ -16677,7 +19893,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Storyboard.TargetProperty="Margin"
+
+
+
+
 
 
 
@@ -16685,7 +19909,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Storyboard>
+
+
+
+
 
 
 
@@ -16693,7 +19925,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Trigger.ExitActions>
+
+
+
+
 
 
 
@@ -16701,7 +19941,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ControlTemplate.Triggers>
+
+
+
+
 
 
 
@@ -16709,7 +19957,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -16717,11 +19973,27 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="VerticalContentAlignment" Value="Center" />
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -16733,7 +20005,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Foreground" Value="{DynamicResource MainForegroundColor}" />
+
+
+
+
 
 
 
@@ -16741,7 +20021,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontFamily" Value="{DynamicResource FontFamily}"/>
+
+
+
+
 
 
 
@@ -16749,7 +20037,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Trigger Property="IsMouseOver" Value="True">
+
+
+
+
 
 
 
@@ -16757,7 +20053,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Trigger>
+
+
+
+
 
 
 
@@ -16765,7 +20069,19 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -16777,7 +20093,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -16785,7 +20109,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="BorderThickness" Value="1"/>
+
+
+
+
 
 
 
@@ -16793,7 +20125,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Padding" Value="5"/>
+
+
+
+
 
 
 
@@ -16801,7 +20141,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Effect">
+
+
+
+
 
 
 
@@ -16809,7 +20157,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity="{DynamicResource BorderOpacity}" Color="{DynamicResource CBorderColor}"/>
+
+
+
+
 
 
 
@@ -16817,11 +20173,27 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
 
 
 
+
+
+
+
         </Style>
+
+
+
+
+
+
+
+
 
 
 
@@ -16833,7 +20205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -16841,7 +20221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="BorderThickness" Value="1"/>
+
+
+
+
 
 
 
@@ -16849,7 +20237,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+
+
+
+
 
 
 
@@ -16857,7 +20253,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Padding" Value="5"/>
+
+
+
+
 
 
 
@@ -16865,7 +20269,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="VerticalAlignment" Value="Center"/>
+
+
+
+
 
 
 
@@ -16873,7 +20285,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="CaretBrush" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -16881,7 +20301,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -16889,7 +20317,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <ContextMenu.Style>
+
+
+
+
 
 
 
@@ -16897,7 +20333,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Setter Property="Template">
+
+
+
+
 
 
 
@@ -16905,7 +20349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <ControlTemplate TargetType="ContextMenu">
+
+
+
+
 
 
 
@@ -16913,7 +20365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 <StackPanel>
+
+
+
+
 
 
 
@@ -16921,7 +20381,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     <MenuItem Command="复制" Header="复制"/>
+
+
+
+
 
 
 
@@ -16929,7 +20397,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 </StackPanel>
+
+
+
+
 
 
 
@@ -16937,7 +20413,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </ControlTemplate>
+
+
+
+
 
 
 
@@ -16945,7 +20429,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Setter>
+
+
+
+
 
 
 
@@ -16953,7 +20445,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </ContextMenu.Style>
+
+
+
+
 
 
 
@@ -16961,7 +20461,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -16969,11 +20477,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Template">
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -16981,7 +20501,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Border Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -16989,7 +20517,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 BorderThickness="{TemplateBinding BorderThickness}"
+
+
+
+
 
 
 
@@ -16997,7 +20533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Grid>
+
+
+
+
 
 
 
@@ -17005,7 +20549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Grid>
+
+
+
+
 
 
 
@@ -17013,7 +20565,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -17021,7 +20581,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
+
+
+
+
 
 
 
@@ -17029,7 +20597,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -17037,7 +20613,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -17045,7 +20629,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -17053,7 +20645,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Background" Value="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -17061,7 +20661,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="BorderThickness" Value="1"/>
+
+
+
+
 
 
 
@@ -17069,7 +20677,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+
+
+
+
 
 
 
@@ -17077,7 +20693,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Padding" Value="5"/>
+
+
+
+
 
 
 
@@ -17085,7 +20709,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="VerticalAlignment" Value="Center"/>
+
+
+
+
 
 
 
@@ -17093,7 +20725,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="CaretBrush" Value="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -17101,7 +20741,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -17109,7 +20757,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Border Background="{TemplateBinding Background}"
+
+
+
+
 
 
 
@@ -17117,7 +20773,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 BorderThickness="{TemplateBinding BorderThickness}"
+
+
+
+
 
 
 
@@ -17125,7 +20789,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Grid>
+
+
+
+
 
 
 
@@ -17133,7 +20805,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Grid>
+
+
+
+
 
 
 
@@ -17141,7 +20821,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ControlTemplate>
+
+
+
+
 
 
 
@@ -17149,7 +20837,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Setter>
+
+
+
+
 
 
 
@@ -17157,7 +20853,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Setter.Value>
+
+
+
+
 
 
 
@@ -17165,7 +20869,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Setter.Value>
+
+
+
+
 
 
 
@@ -17173,7 +20885,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -17181,7 +20901,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Setter Property="Visibility" Value="Collapsed"/>
+
+
+
+
 
 
 
@@ -17189,7 +20917,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <MultiDataTrigger>
+
+
+
+
 
 
 
@@ -17197,7 +20933,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Condition Binding="{Binding Path=ComputedHorizontalScrollBarVisibility, ElementName=scrollViewer}" Value="Visible"/>
+
+
+
+
 
 
 
@@ -17205,7 +20949,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </MultiDataTrigger.Conditions>
+
+
+
+
 
 
 
@@ -17213,7 +20965,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </MultiDataTrigger>
+
+
+
+
 
 
 
@@ -17221,7 +20981,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Style>
+
+
+
+
 
 
 
@@ -17229,7 +20997,15 @@ $inputXML = @'
 
 
 
+
+
+
+
     <Grid Background="{DynamicResource MainBackgroundColor}" ShowGridLines="False" Name="WPFMainGrid" Width="自动" Height="自动" HorizontalAlignment="Stretch">
+
+
+
+
 
 
 
@@ -17237,11 +21013,23 @@ $inputXML = @'
 
 
 
+
+
+
+
             <RowDefinition Height="自动"/>
 
 
 
+
+
+
+
             <RowDefinition Height="自动"/>
+
+
+
+
 
 
 
@@ -17249,7 +21037,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Grid.RowDefinitions>
+
+
+
+
 
 
 
@@ -17257,7 +21053,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -17265,7 +21069,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         <!-- Offline banner -->
+
+
+
+
 
 
 
@@ -17273,7 +21085,15 @@ $inputXML = @'
 
 
 
-            <TextBlock Text="&#x26A0; 离线模式 - 无网络连? Foreground="White" FontWeight="Bold"
+
+
+
+
+            <TextBlock Text="&#x26A0; 离线模式 - 无网络连接" Foreground="White" FontWeight="Bold"
+
+
+
+
 
 
 
@@ -17281,7 +21101,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </Border>
+
+
+
+
 
 
 
@@ -17289,7 +21117,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -17297,7 +21133,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ColumnDefinition Width="*"/> <!-- Search bar and buttons -->
+
+
+
+
 
 
 
@@ -17309,7 +21153,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
             <!-- Navigation Buttons Panel -->
+
+
+
+
 
 
 
@@ -17317,7 +21173,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <StackPanel Name="NavLogoPanel" Orientation="Horizontal" HorizontalAlignment="Left" Background="{DynamicResource MainBackgroundColor}" SnapsToDevicePixels="True" Margin="10,0,20,0">
+
+
+
+
 
 
 
@@ -17325,7 +21189,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ToggleButton Margin="0,0,5,0" Height="{DynamicResource TabButtonHeight}" Width="{DynamicResource TabButtonWidth}"
+
+
+
+
 
 
 
@@ -17333,7 +21205,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17341,7 +21221,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             安装
+
+
+
+
 
 
 
@@ -17349,7 +21237,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17357,7 +21253,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ToggleButton Margin="0,0,5,0" Height="{DynamicResource TabButtonHeight}" Width="{DynamicResource TabButtonWidth}"
+
+
+
+
 
 
 
@@ -17365,7 +21269,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17373,7 +21285,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             调整
+
+
+
+
 
 
 
@@ -17381,7 +21301,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17389,7 +21317,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ToggleButton Margin="0,0,5,0" Height="{DynamicResource TabButtonHeight}" Width="{DynamicResource TabButtonWidth}"
+
+
+
+
 
 
 
@@ -17397,7 +21333,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17405,7 +21349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             配置
+
+
+
+
 
 
 
@@ -17413,11 +21365,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ToggleButton.Content>
 
 
 
+
+
+
+
                 </ToggleButton>
+
+
+
+
 
 
 
@@ -17425,11 +21389,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Background="{DynamicResource Button更新BackgroundColor}" Foreground="{DynamicResource Button更新ForegroundColor}" FontWeight="Bold" Name="WPFTab4BT">
 
 
 
+
+
+
+
                     <ToggleButton.Content>
+
+
+
+
 
 
 
@@ -17437,7 +21413,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             更新
+
+
+
+
 
 
 
@@ -17445,11 +21429,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </ToggleButton.Content>
 
 
 
+
+
+
+
                 </ToggleButton>
+
+
+
+
 
 
 
@@ -17457,7 +21453,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Background="{DynamicResource ButtonWin11ISOBackgroundColor}" Foreground="{DynamicResource ButtonWin11ISOForegroundColor}" FontWeight="Bold" Name="WPFTab5BT">
+
+
+
+
 
 
 
@@ -17465,13 +21469,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <TextBlock FontSize="{DynamicResource TabButtonFontSize}" Background="Transparent" Foreground="{DynamicResource ButtonWin11ISOForegroundColor}">
+
+
+
+
 
 
 
                             Win11 创建?
 
+
+
                         </TextBlock>
+
+
+
+
 
 
 
@@ -17479,7 +21497,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </ToggleButton>
+
+
+
+
 
 
 
@@ -17491,7 +21517,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
             <!-- Search Bar and Action Buttons -->
+
+
+
+
 
 
 
@@ -17499,7 +21537,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -17507,7 +21553,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <ColumnDefinition Width="自动"/><!-- Buttons area -->
+
+
+
+
 
 
 
@@ -17519,7 +21573,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                 <Border Grid.Column="0" Margin="5,0,0,0" Width="{DynamicResource SearchBarWidth}" Height="{DynamicResource SearchBarHeight}" VerticalAlignment="Center" HorizontalAlignment="Left">
+
+
+
+
 
 
 
@@ -17527,7 +21593,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <TextBox
+
+
+
+
 
 
 
@@ -17535,7 +21609,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             Height="{DynamicResource SearchBarHeight}"
+
+
+
+
 
 
 
@@ -17543,7 +21625,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             VerticalAlignment="Center" HorizontalAlignment="Left"
+
+
+
+
 
 
 
@@ -17551,7 +21641,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             Name="SearchBar"
+
+
+
+
 
 
 
@@ -17559,7 +21657,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             Padding="3,3,30,0"
+
+
+
+
 
 
 
@@ -17567,7 +21673,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </TextBox>
+
+
+
+
 
 
 
@@ -17575,7 +21689,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             VerticalAlignment="Center" HorizontalAlignment="Right"
+
+
+
+
 
 
 
@@ -17583,7 +21705,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             Foreground="{DynamicResource ButtonBackgroundSelectedColor}"
+
+
+
+
 
 
 
@@ -17591,7 +21721,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             Margin="0,0,8,0" Width="自动" Height="自动">&#xE721;
+
+
+
+
 
 
 
@@ -17599,7 +21737,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Grid>
+
+
+
+
 
 
 
@@ -17607,7 +21753,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Button Grid.Column="0"
+
+
+
+
 
 
 
@@ -17615,7 +21769,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Name="SearchBarClearButton"
+
+
+
+
 
 
 
@@ -17623,7 +21785,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Margin="213,0,0,0" Visibility="Collapsed">
+
+
+
+
 
 
 
@@ -17635,7 +21805,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                 <!-- Buttons Container -->
+
+
+
+
 
 
 
@@ -17643,7 +21825,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Button Name="ThemeButton"
+
+
+
+
 
 
 
@@ -17651,7 +21841,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         BorderBrush="Transparent"
+
+
+
+
 
 
 
@@ -17659,7 +21857,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -17667,7 +21873,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Width="{DynamicResource IconButtonSize}" Height="{DynamicResource IconButtonSize}"
+
+
+
+
 
 
 
@@ -17675,7 +21889,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Margin="0,0,2,0"
+
+
+
+
 
 
 
@@ -17683,7 +21905,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Content="&#xE713;"
+
+
+
+
 
 
 
@@ -17691,7 +21921,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 />
+
+
+
+
 
 
 
@@ -17699,7 +21937,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     IsOpen="False"
+
+
+
+
 
 
 
@@ -17707,7 +21953,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     HorizontalAlignment="Right" VerticalAlignment="Top">
+
+
+
+
 
 
 
@@ -17715,7 +21969,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <StackPanel Background="{DynamicResource MainBackgroundColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+
+
+
 
 
 
@@ -17723,7 +21985,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -17731,11 +22001,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </MenuItem.ToolTip>
 
 
 
+
+
+
+
                             </MenuItem>
+
+
+
+
 
 
 
@@ -17743,7 +22025,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -17751,11 +22041,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </MenuItem.ToolTip>
 
 
 
+
+
+
+
                             </MenuItem>
+
+
+
+
 
 
 
@@ -17763,7 +22065,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -17771,7 +22081,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -17779,7 +22097,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </StackPanel>
+
+
+
+
 
 
 
@@ -17787,7 +22113,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Popup>
+
+
+
+
+
+
+
+
 
 
 
@@ -17799,7 +22137,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         Style="{StaticResource HoverButtonStyle}"
+
+
+
+
 
 
 
@@ -17807,7 +22153,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Background="{DynamicResource MainBackgroundColor}"
+
+
+
+
 
 
 
@@ -17815,7 +22169,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     FontSize="{DynamicResource SettingsIconFontSize}"
+
+
+
+
 
 
 
@@ -17823,7 +22185,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     HorizontalAlignment="Right" VerticalAlignment="Top"
+
+
+
+
 
 
 
@@ -17831,7 +22201,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     FontFamily="Segoe MDL2 Assets"
+
+
+
+
 
 
 
@@ -17839,7 +22217,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     ToolTip="为辅助功能调整字体缩?
+
+
+
+
 
 
 
@@ -17847,7 +22233,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Popup Name="FontScalingPopup"
+
+
+
+
 
 
 
@@ -17855,7 +22249,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     PlacementTarget="{Binding ElementName=FontScalingButton}" Placement="Bottom"
+
+
+
+
 
 
 
@@ -17863,7 +22265,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Border Background="{DynamicResource MainBackgroundColor}" BorderBrush="{DynamicResource MainForegroundColor}" BorderThickness="1" CornerRadius="0" Margin="0">
+
+
+
+
 
 
 
@@ -17871,7 +22281,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <TextBlock Text="字体缩放"
+
+
+
+
 
 
 
@@ -17879,11 +22297,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                        Foreground="{DynamicResource MainForegroundColor}"
 
 
 
+
+
+
+
                                        HorizontalAlignment="Center"
+
+
+
+
 
 
 
@@ -17891,7 +22321,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                        FontWeight="Bold"/>
+
+
+
+
 
 
 
@@ -17899,7 +22337,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <StackPanel Orientation="Horizontal" Margin="10,5,10,10">
+
+
+
+
 
 
 
@@ -17907,7 +22353,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            FontSize="{DynamicResource ButtonFontSize}"
+
+
+
+
 
 
 
@@ -17915,7 +22369,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            VerticalAlignment="Center"
+
+
+
+
 
 
 
@@ -17923,7 +22385,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Slider Name="FontScalingSlider"
+
+
+
+
 
 
 
@@ -17931,7 +22401,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Value="1.0"
+
+
+
+
 
 
 
@@ -17939,7 +22417,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         TickPlacement="BottomRight"
+
+
+
+
 
 
 
@@ -17947,7 +22433,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Width="120"
+
+
+
+
 
 
 
@@ -17955,7 +22449,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <TextBlock Text="?Text="?
+
+
+
+
 
 
 
@@ -17963,7 +22465,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -17971,11 +22481,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            Margin="10,0,0,0"/>
 
 
 
+
+
+
+
                             </StackPanel>
+
+
+
+
 
 
 
@@ -17983,7 +22505,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                        Text="100%"
+
+
+
+
 
 
 
@@ -17991,7 +22521,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                        Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -17999,7 +22537,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                        Margin="10,0,10,5"/>
+
+
+
+
 
 
 
@@ -18007,7 +22553,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Button Name="FontScalingResetButton"
+
+
+
+
 
 
 
@@ -18015,7 +22569,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Style="{StaticResource HoverButtonStyle}"
+
+
+
+
 
 
 
@@ -18023,7 +22585,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Margin="5,0,5,0"/>
+
+
+
+
 
 
 
@@ -18031,7 +22601,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Content="应用"
+
+
+
+
 
 
 
@@ -18039,7 +22617,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Width="60" Height="25"
+
+
+
+
 
 
 
@@ -18047,7 +22633,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </StackPanel>
+
+
+
+
 
 
 
@@ -18055,11 +22649,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Border>
 
 
 
+
+
+
+
                 </Popup>
+
+
+
+
+
+
+
+
 
 
 
@@ -18071,7 +22681,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         Style="{StaticResource HoverButtonStyle}"
+
+
+
+
 
 
 
@@ -18079,7 +22697,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     Background="{DynamicResource MainBackgroundColor}"
+
+
+
+
 
 
 
@@ -18087,7 +22713,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     FontSize="{DynamicResource SettingsIconFontSize}"
+
+
+
+
 
 
 
@@ -18095,7 +22729,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     HorizontalAlignment="Right" VerticalAlignment="Top"
+
+
+
+
 
 
 
@@ -18103,7 +22745,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     FontFamily="Segoe MDL2 Assets"
+
+
+
+
 
 
 
@@ -18111,7 +22761,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Popup Name="SettingsPopup"
+
+
+
+
 
 
 
@@ -18119,7 +22777,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     PlacementTarget="{Binding ElementName=SettingsButton}" Placement="Bottom"
+
+
+
+
 
 
 
@@ -18127,7 +22793,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Border Background="{DynamicResource MainBackgroundColor}" BorderBrush="{DynamicResource MainForegroundColor}" BorderThickness="1" CornerRadius="0" Margin="0">
+
+
+
+
 
 
 
@@ -18135,11 +22809,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <MenuItem FontSize="{DynamicResource ButtonFontSize}" Header="导入" Name="ImportMenuItem" Foreground="{DynamicResource MainForegroundColor}">
 
 
 
+
+
+
+
                                 <MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -18147,11 +22833,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </MenuItem.ToolTip>
 
 
 
+
+
+
+
                             </MenuItem>
+
+
+
+
 
 
 
@@ -18159,7 +22857,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -18167,7 +22873,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </MenuItem.ToolTip>
+
+
+
+
 
 
 
@@ -18175,7 +22889,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Separator/>
+
+
+
+
 
 
 
@@ -18183,7 +22905,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <MenuItem FontSize="{DynamicResource ButtonFontSize}" Header="文档" Name="DocumentationMenuItem" Foreground="{DynamicResource MainForegroundColor}"/>
+
+
+
+
 
 
 
@@ -18191,11 +22921,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </StackPanel>
 
 
 
+
+
+
+
                     </Border>
+
+
+
+
 
 
 
@@ -18207,7 +22949,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                     <Button
+
+
+
+
 
 
 
@@ -18215,7 +22969,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 BorderBrush="Transparent"
+
+
+
+
 
 
 
@@ -18223,7 +22985,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 Width="{DynamicResource IconButtonSize}" Height="{DynamicResource IconButtonSize}"
+
+
+
+
 
 
 
@@ -18231,7 +23001,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 Margin="0,0,0,0"
+
+
+
+
 
 
 
@@ -18239,7 +23017,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 Foreground="{DynamicResource MainForegroundColor}" FontSize="{DynamicResource CloseIconFontSize}" Name="WPFCloseButton" />
+
+
+
+
 
 
 
@@ -18247,7 +23033,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </Grid>
+
+
+
+
 
 
 
@@ -18259,11 +23053,27 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
         <TabControl Name="WPFTabNav" Background="Transparent" Width="自动" Height="自动" BorderBrush="Transparent" BorderThickness="0" Grid.Row="2" Grid.Column="0" Padding="-1">
 
 
 
+
+
+
+
             <TabItem Header="安装" Visibility="Collapsed" Name="WPFTab1">
+
+
+
+
 
 
 
@@ -18275,7 +23085,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                     <Grid Grid.Row="0" Grid.Column="0" Margin="{DynamicResource TabContentMargin}">
+
+
+
+
 
 
 
@@ -18283,11 +23105,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <ColumnDefinition Width="自动" />
 
 
 
+
+
+
+
                             <ColumnDefinition Width="*" />
+
+
+
+
 
 
 
@@ -18299,11 +23133,31 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                         <Grid Name="appscategory" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -18315,7 +23169,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
 
 
 
@@ -18323,7 +23185,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Grid>
+
+
+
+
 
 
 
@@ -18331,7 +23201,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             <TabItem Header="调整" Visibility="Collapsed" Name="WPFTab2">
+
+
+
+
 
 
 
@@ -18339,7 +23217,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <!-- Main content area with a ScrollViewer -->
+
+
+
+
 
 
 
@@ -18347,7 +23233,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <RowDefinition Height="*" />
+
+
+
+
 
 
 
@@ -18355,7 +23249,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Grid.RowDefinitions>
+
+
+
+
+
+
+
+
 
 
 
@@ -18367,7 +23273,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid Background="Transparent">
+
+
+
+
 
 
 
@@ -18375,7 +23289,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <RowDefinition Height="自动"/>
+
+
+
+
 
 
 
@@ -18383,7 +23305,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <RowDefinition Height="自动"/>
+
+
+
+
 
 
 
@@ -18395,7 +23325,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                             <StackPanel Background="{DynamicResource MainBackgroundColor}" Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+
+
+
+
 
 
 
@@ -18403,7 +23345,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,2,0,0">
+
+
+
+
 
 
 
@@ -18411,7 +23361,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Button Name="WPFminimal" Content=" 最? Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -18419,7 +23377,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Button Name="WPFGetInstalledTweaks" Content=" 获取已安装调? Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -18427,7 +23393,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </StackPanel>
+
+
+
+
+
+
+
+
 
 
 
@@ -18439,11 +23417,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <!-- Your tweakspanel content goes here -->
 
 
 
+
+
+
+
                             </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -18455,7 +23449,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <StackPanel Background="{DynamicResource MainBackgroundColor}" Orientation="Horizontal" HorizontalAlignment="Left">
+
+
+
+
 
 
 
@@ -18463,9 +23465,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         注意：将鼠标悬停在项目上可查看更详细的说明。请谨慎操作，许多调整会显著修改系统?
 
+
+
                                         <LineBreak/>推荐选项适用于普通用户，如不确定请不要勾选其他项目！
+
+
+
+
 
 
 
@@ -18473,7 +23485,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </StackPanel>
+
+
+
+
 
 
 
@@ -18481,7 +23501,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
 
 
 
@@ -18489,7 +23517,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     <Border Grid.Row="1" Background="{DynamicResource MainBackgroundColor}" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Stretch" Padding="10">
+
+
+
+
 
 
 
@@ -18497,7 +23533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Button Name="WPFtweaksbutton" Content="运行调整" Margin="5" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -18505,7 +23549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         </WrapPanel>
+
+
+
+
 
 
 
@@ -18513,11 +23565,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                 </Grid>
 
 
 
+
+
+
+
             </TabItem>
+
+
+
+
 
 
 
@@ -18525,7 +23589,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ScrollViewer VerticalScrollBarVisibility="自动" HorizontalScrollBarVisibility="自动" Margin="{DynamicResource TabContentMargin}">
+
+
+
+
 
 
 
@@ -18533,7 +23605,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Grid>
+
+
+
+
 
 
 
@@ -18541,7 +23621,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </TabItem>
+
+
+
+
 
 
 
@@ -18549,7 +23637,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <ScrollViewer VerticalScrollBarVisibility="自动" HorizontalScrollBarVisibility="Disabled" Margin="{DynamicResource TabContentMargin}">
+
+
+
+
 
 
 
@@ -18557,7 +23653,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid.RowDefinitions>
+
+
+
+
 
 
 
@@ -18565,7 +23669,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <RowDefinition Height="自动"/>  <!-- Row for Windows Version -->
+
+
+
+
 
 
 
@@ -18577,7 +23689,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                         <!-- Three columns container -->
+
+
+
+
 
 
 
@@ -18585,19 +23709,39 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Grid.ColumnDefinitions>
 
 
 
-                                <ColumnDefinition Width="*"/>
 
-
-
-                                <ColumnDefinition Width="*"/>
 
 
 
                                 <ColumnDefinition Width="*"/>
+
+
+
+
+
+
+
+                                <ColumnDefinition Width="*"/>
+
+
+
+
+
+
+
+                                <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -18609,7 +23753,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                             <!-- 默认设置 -->
+
+
+
+
 
 
 
@@ -18617,7 +23773,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <StackPanel>
+
+
+
+
 
 
 
@@ -18625,7 +23789,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             FontSize="{DynamicResource 配置TabButtonFontSize}"
+
+
+
+
 
 
 
@@ -18633,7 +23805,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Margin="10,5"
+
+
+
+
 
 
 
@@ -18641,7 +23821,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <TextBlock Margin="10"
+
+
+
+
 
 
 
@@ -18649,7 +23837,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                              Foreground="{DynamicResource MainForegroundColor}">
+
+
+
+
 
 
 
@@ -18657,7 +23853,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18665,7 +23869,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18673,7 +23885,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/><LineBreak/>
+
+
+
+
 
 
 
@@ -18681,7 +23901,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -18689,7 +23917,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Border>
+
+
+
+
+
+
+
+
 
 
 
@@ -18701,7 +23941,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+
+
+
+
 
 
 
@@ -18709,7 +23957,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Button Name="WPFUpdatessecurity"
+
+
+
+
 
 
 
@@ -18717,7 +23973,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Content="安全设置"
+
+
+
+
 
 
 
@@ -18725,7 +23989,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Padding="10"/>
+
+
+
+
 
 
 
@@ -18733,7 +24005,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                              TextWrapping="Wrap"
+
+
+
+
 
 
 
@@ -18741,17 +24021,35 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Run FontWeight="Bold">平衡安全配置</Run>
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
                                          - 功能更新延迟 365 ?
 
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18759,7 +24057,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/><LineBreak/>
+
+
+
+
 
 
 
@@ -18767,7 +24073,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18775,7 +24089,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <LineBreak/><LineBreak/>
+
+
+
+
 
 
 
@@ -18783,7 +24105,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -18791,7 +24121,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Border>
+
+
+
+
+
+
+
+
 
 
 
@@ -18803,7 +24145,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Border Grid.Column="2" Style="{StaticResource BorderStyle}">
+
+
+
+
 
 
 
@@ -18811,7 +24161,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Button Name="WPFUpdatesdisable"
+
+
+
+
 
 
 
@@ -18819,7 +24177,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Content="禁用所有更?
+
+
+
+
 
 
 
@@ -18827,7 +24193,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Margin="10,5"
+
+
+
+
 
 
 
@@ -18835,7 +24209,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <TextBlock Margin="10"
+
+
+
+
 
 
 
@@ -18843,7 +24225,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                              Foreground="{DynamicResource MainForegroundColor}">
+
+
+
+
 
 
 
@@ -18851,7 +24241,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18859,7 +24257,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
@@ -18867,13 +24273,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <LineBreak/>
+
+
+
+
 
 
 
                                          - 仅用于隔离环?
 
+
+
                                         <LineBreak/><LineBreak/>
+
+
+
+
 
 
 
@@ -18881,7 +24301,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -18889,11 +24317,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Border>
 
 
 
+
+
+
+
                         </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -18905,7 +24349,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid Name="updatespanel" Grid.Row="1" Background="Transparent">
+
+
+
+
 
 
 
@@ -18913,7 +24365,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                     </Grid>
+
+
+
+
 
 
 
@@ -18921,7 +24381,15 @@ $inputXML = @'
 
 
 
+
+
+
+
             </TabItem>
+
+
+
+
 
 
 
@@ -18929,7 +24397,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                 <Grid Name="Win11ISOPanel" Margin="{DynamicResource TabContentMargin}" Background="Transparent">
+
+
+
+
 
 
 
@@ -18937,11 +24413,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <RowDefinition Height="自动"/>  <!-- Steps 1-4 -->
 
 
 
+
+
+
+
                         <RowDefinition Height="*"/>     <!-- Log / Status -->
+
+
+
+
 
 
 
@@ -18953,7 +24441,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                     <!-- Steps 1-4 -->
+
+
+
+
 
 
 
@@ -18965,7 +24465,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                             <!-- ─── STEP 1 : Select Windows 11 ISO ─────────────── -->
+
+
+
+
 
 
 
@@ -18973,19 +24485,43 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Grid.ColumnDefinitions>
 
 
 
+
+
+
+
                                     <ColumnDefinition Width="*"/>
 
 
 
+
+
+
+
                                     <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
                                 </Grid.ColumnDefinitions>
+
+
+
+
+
+
+
+
 
 
 
@@ -18997,7 +24533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <StackPanel Grid.Column="0" Margin="5,5,15,5">
+
+
+
+
 
 
 
@@ -19005,7 +24549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                Foreground="{DynamicResource MainForegroundColor}" Margin="0,0,0,8">
+
+
+
+
 
 
 
@@ -19013,11 +24565,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
 
 
 
+
+
+
+
                                     <TextBlock FontSize="{DynamicResource FontSize}" Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19025,11 +24589,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         浏览并选择本地保存?Windows 11 ISO 文件。仅支持官方 ISO?
+
+
 
                                         从微软下载的官方 ISO?
 
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -19037,13 +24613,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                TextWrapping="Wrap" Margin="0,0,0,12" FontStyle="Italic">
+
+
+
+
 
 
 
                                         <Run FontWeight="Bold">注意?/Run>仅用于全新安装或干净安装?Windows?
 
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -19051,7 +24641,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -19059,7 +24657,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <ColumnDefinition Width="自动"/>
+
+
+
+
 
 
 
@@ -19067,7 +24673,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBox Grid.Column="0"
+
+
+
+
 
 
 
@@ -19075,7 +24689,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                  IsReadOnly="True"
+
+
+
+
 
 
 
@@ -19083,7 +24705,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                  Padding="6,4"
+
+
+
+
 
 
 
@@ -19091,7 +24721,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                  Text="尚未选择 ISO..."
+
+
+
+
 
 
 
@@ -19099,7 +24737,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                  Background="{DynamicResource MainBackgroundColor}"/>
+
+
+
+
 
 
 
@@ -19107,7 +24753,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Name="WPFWin11ISOBrowseButton"
+
+
+
+
 
 
 
@@ -19115,7 +24769,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Width="自动" Padding="12,0"
+
+
+
+
 
 
 
@@ -19123,7 +24785,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </Grid>
+
+
+
+
 
 
 
@@ -19131,7 +24801,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                FontSize="{DynamicResource FontSize}"
+
+
+
+
 
 
 
@@ -19139,7 +24817,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                Margin="0,8,0,0"
+
+
+
+
 
 
 
@@ -19147,11 +24833,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                Visibility="Collapsed"/>
 
 
 
+
+
+
+
                                 </StackPanel>
+
+
+
+
+
+
+
+
 
 
 
@@ -19163,7 +24865,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Border Grid.Column="1"
+
+
+
+
 
 
 
@@ -19171,7 +24881,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         BorderBrush="{DynamicResource BorderColor}"
+
+
+
+
 
 
 
@@ -19179,7 +24897,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Margin="5" Padding="15">
+
+
+
+
 
 
 
@@ -19187,7 +24913,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBlock FontSize="{DynamicResource FontSize}" FontWeight="Bold"
+
+
+
+
 
 
 
@@ -19195,7 +24929,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             !!警告!! 必须使用微软官方 ISO
+
+
+
+
 
 
 
@@ -19203,11 +24945,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBlock FontSize="{DynamicResource FontSize}"
 
 
 
+
+
+
+
                                                    Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19215,15 +24969,31 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             请直接从 Microsoft.com 下载 Windows 11 ISO?
+
+
 
                                             不支持第三方、预修改或非官方镜像
 
 
 
+
+
+
+
                                             可能导致生成结果不可用?
 
+
+
                                         </TextBlock>
+
+
+
+
 
 
 
@@ -19231,7 +25001,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19239,9 +25017,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             在微软下载页面请选择?
 
+
+
                                         </TextBlock>
+
+
+
+
 
 
 
@@ -19249,7 +25037,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19257,7 +25053,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             - 版本：Windows 11
+
+
+
+
 
 
 
@@ -19265,9 +25069,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <LineBreak/>- 架构?4 位（x64?
 
+
+
                                         </TextBlock>
+
+
+
+
 
 
 
@@ -19275,7 +25089,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Content="打开微软下载页面"
+
+
+
+
 
 
 
@@ -19283,7 +25105,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Width="自动" Padding="12,0"
+
+
+
+
 
 
 
@@ -19291,7 +25121,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </StackPanel>
+
+
+
+
 
 
 
@@ -19299,7 +25137,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -19311,7 +25161,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <Grid Name="WPFWin11ISOMountSection"
+
+
+
+
 
 
 
@@ -19319,7 +25177,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                   Visibility="Collapsed"
+
+
+
+
 
 
 
@@ -19327,7 +25193,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -19335,7 +25209,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -19347,7 +25229,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                 <StackPanel Grid.Column="0" Margin="0,0,20,0" VerticalAlignment="Top">
+
+
+
+
 
 
 
@@ -19355,7 +25249,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                Foreground="{DynamicResource MainForegroundColor}" Margin="0,0,0,8">
+
+
+
+
 
 
 
@@ -19363,7 +25265,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -19371,7 +25281,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19379,13 +25297,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         挂载 ISO 并确认其中包含有效的 Windows 11
+
+
+
+
 
 
 
                                         install.wim，然后再进行任何修改?
 
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -19393,7 +25325,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Content="挂载 &amp; 验证 ISO"
+
+
+
+
 
 
 
@@ -19401,7 +25341,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Width="自动" Padding="12,0"
+
+
+
+
 
 
 
@@ -19409,7 +25357,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <CheckBox Name="WPFWin11ISOInjectDrivers"
+
+
+
+
 
 
 
@@ -19417,7 +25373,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               FontSize="{DynamicResource FontSize}"
+
+
+
+
 
 
 
@@ -19425,7 +25389,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               IsChecked="False"
+
+
+
+
 
 
 
@@ -19433,7 +25405,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                               ToolTip="导出此机器上的所有驱动程序并注入 install.wim ?boot.wim，推荐用?NVMe 或网络控制器不受支持的系统?>
+
+
+
+
 
 
 
@@ -19445,7 +25425,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                 <!-- Verification results panel -->
+
+
+
+
 
 
 
@@ -19453,7 +25445,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Name="WPFWin11ISOVerifyResultPanel"
+
+
+
+
 
 
 
@@ -19461,7 +25461,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         BorderBrush="{DynamicResource BorderColor}"
+
+
+
+
 
 
 
@@ -19469,7 +25477,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Padding="12" Margin="0,0,0,0"
+
+
+
+
 
 
 
@@ -19477,7 +25493,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <StackPanel>
+
+
+
+
 
 
 
@@ -19485,7 +25509,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    FontSize="{DynamicResource FontSize}"
+
+
+
+
 
 
 
@@ -19493,7 +25525,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    Margin="0,0,0,4"/>
+
+
+
+
 
 
 
@@ -19501,11 +25541,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    FontSize="{DynamicResource FontSize}"
 
 
 
+
+
+
+
                                                    Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19513,7 +25565,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBlock FontSize="{DynamicResource FontSize}" FontWeight="Bold"
+
+
+
+
 
 
 
@@ -19521,13 +25581,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    Margin="0,6,0,4">
+
+
+
+
 
 
 
                                             选择版本?
 
+
+
                                         </TextBlock>
+
+
+
+
 
 
 
@@ -19535,7 +25609,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   FontSize="{DynamicResource FontSize}"
+
+
+
+
 
 
 
@@ -19543,7 +25625,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   Background="{DynamicResource MainBackgroundColor}"
+
+
+
+
 
 
 
@@ -19551,7 +25641,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                   Margin="0,0,0,0"/>
+
+
+
+
 
 
 
@@ -19559,7 +25657,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </Border>
+
+
+
+
 
 
 
@@ -19571,7 +25677,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                             <!-- ─── STEP 3 : Modify install.wim ───────────────────── -->
+
+
+
+
 
 
 
@@ -19579,7 +25697,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Margin="5"
+
+
+
+
 
 
 
@@ -19587,7 +25713,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         HorizontalAlignment="Left" MinWidth="{DynamicResource ButtonWidth}">
+
+
+
+
 
 
 
@@ -19595,7 +25729,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            Foreground="{DynamicResource MainForegroundColor}" Margin="0,0,0,8">
+
+
+
+
 
 
 
@@ -19603,7 +25745,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 </TextBlock>
+
+
+
+
 
 
 
@@ -19611,7 +25761,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                            Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -19619,19 +25777,39 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     ISO 内容将被解压到临时工作目录，
+
+
+
+
 
 
 
                                     install.wim 将被修改（移除组件、应用调整）?
 
+
+
                                     然后重新打包生成结果。此过程可能需要几分钟
+
+
+
+
 
 
 
                                     取决于你的硬件性能?
 
+
+
                                 </TextBlock>
+
+
+
+
 
 
 
@@ -19639,7 +25817,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Content="运行 Windows ISO 修改器并创建输出"
+
+
+
+
 
 
 
@@ -19647,7 +25833,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Width="自动" Padding="12,0"
+
+
+
+
 
 
 
@@ -19655,7 +25849,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </StackPanel>
+
+
+
+
+
+
+
+
 
 
 
@@ -19667,7 +25873,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <StackPanel Name="WPFWin11ISOOutputSection"
+
+
+
+
 
 
 
@@ -19675,7 +25889,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Visibility="Collapsed"
+
+
+
+
 
 
 
@@ -19683,7 +25905,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <!-- Header row: title + Clean & 重置 button -->
+
+
+
+
 
 
 
@@ -19691,7 +25921,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -19699,7 +25937,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <ColumnDefinition Width="自动"/>
+
+
+
+
 
 
 
@@ -19707,7 +25953,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <TextBlock Grid.Column="0" FontSize="{DynamicResource FontSize}" FontWeight="Bold"
+
+
+
+
 
 
 
@@ -19715,7 +25969,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                VerticalAlignment="Center">
+
+
+
+
 
 
 
@@ -19723,7 +25985,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </TextBlock>
+
+
+
+
 
 
 
@@ -19731,7 +26001,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Name="WPFWin11ISOCleanResetButton"
+
+
+
+
 
 
 
@@ -19739,7 +26017,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Foreground="OrangeRed"
+
+
+
+
 
 
 
@@ -19747,7 +26033,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Height="{DynamicResource ButtonHeight}"
+
+
+
+
 
 
 
@@ -19755,11 +26049,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Margin="12,0,0,0"/>
 
 
 
+
+
+
+
                                 </Grid>
+
+
+
+
+
+
+
+
 
 
 
@@ -19771,7 +26081,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                 <Grid Margin="0,0,0,12">
+
+
+
+
 
 
 
@@ -19779,7 +26097,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -19787,7 +26113,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -19795,7 +26129,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     <Button Grid.Column="0"
+
+
+
+
 
 
 
@@ -19803,7 +26145,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Content="保存?ISO 文件"
+
+
+
+
 
 
 
@@ -19811,11 +26161,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Width="自动" Padding="12,0"
 
 
 
+
+
+
+
                                             Height="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -19823,7 +26185,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Name="WPFWin11ISOChooseUSBButton"
+
+
+
+
 
 
 
@@ -19831,7 +26201,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Foreground="OrangeRed"
+
+
+
+
 
 
 
@@ -19839,11 +26217,23 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             Width="自动" Padding="12,0"
 
 
 
+
+
+
+
                                             Height="{DynamicResource ButtonHeight}"/>
+
+
+
+
 
 
 
@@ -19855,7 +26245,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                                 <!-- ── USB write sub-panel (revealed on USB choice) ── -->
+
+
+
+
 
 
 
@@ -19863,7 +26265,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Style="{StaticResource BorderStyle}"
+
+
+
+
 
 
 
@@ -19871,7 +26281,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         Margin="0,8,0,0">
+
+
+
+
 
 
 
@@ -19879,7 +26297,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <TextBlock FontSize="{DynamicResource FontSize}"
+
+
+
+
 
 
 
@@ -19887,7 +26313,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                    TextWrapping="Wrap" Margin="0,0,0,8">
+
+
+
+
 
 
 
@@ -19895,13 +26329,27 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             <LineBreak/>
+
+
+
+
 
 
 
                                             选择下面的可移动 USB 驱动器，然后点击“擦除并写入”?
 
+
+
                                         </TextBlock>
+
+
+
+
 
 
 
@@ -19909,7 +26357,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         <Grid Margin="0,0,0,8">
+
+
+
+
 
 
 
@@ -19917,7 +26373,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 <ColumnDefinition Width="*"/>
+
+
+
+
 
 
 
@@ -19925,7 +26389,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                             </Grid.ColumnDefinitions>
+
+
+
+
 
 
 
@@ -19933,7 +26405,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                       Name="WPFWin11ISOUSBDriveComboBox"
+
+
+
+
 
 
 
@@ -19941,7 +26421,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                       Background="{DynamicResource MainBackgroundColor}"
+
+
+
+
 
 
 
@@ -19949,7 +26437,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                       Margin="0,0,6,0"/>
+
+
+
+
 
 
 
@@ -19957,7 +26453,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Name="WPFWin11ISORefreshUSBButton"
+
+
+
+
 
 
 
@@ -19965,7 +26469,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                     Width="自动" Padding="8,0"
+
+
+
+
 
 
 
@@ -19973,7 +26485,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                         </Grid>
+
+
+
+
 
 
 
@@ -19981,7 +26501,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Content="擦除 &amp; 写入 USB"
+
+
+
+
 
 
 
@@ -19989,7 +26517,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 HorizontalAlignment="Stretch"
+
+
+
+
 
 
 
@@ -19997,7 +26533,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                                 Height="{DynamicResource ButtonHeight}"
+
+
+
+
 
 
 
@@ -20005,7 +26549,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                     </StackPanel>
+
+
+
+
 
 
 
@@ -20013,7 +26565,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             </StackPanel>
+
+
+
+
+
+
+
+
 
 
 
@@ -20029,7 +26593,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                     <!-- 状态日?(fills remaining height) -->
+
+
+
+
 
 
 
@@ -20037,7 +26613,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <Grid.RowDefinitions>
+
+
+
+
 
 
 
@@ -20045,7 +26629,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                             <RowDefinition Height="*"/>
+
+
+
+
 
 
 
@@ -20053,7 +26645,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                         <TextBlock Grid.Row="0"
+
+
+
+
 
 
 
@@ -20061,7 +26661,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                    Foreground="{DynamicResource MainForegroundColor}"
+
+
+
+
 
 
 
@@ -20069,9 +26677,19 @@ $inputXML = @'
 
 
 
+
+
+
+
                             状态日?
 
+
+
                         </TextBlock>
+
+
+
+
 
 
 
@@ -20079,7 +26697,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  Name="WPFWin11ISOStatusLog"
+
+
+
+
 
 
 
@@ -20087,7 +26713,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  TextWrapping="Wrap"
+
+
+
+
 
 
 
@@ -20095,7 +26729,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  VerticalAlignment="Stretch"
+
+
+
+
 
 
 
@@ -20103,7 +26745,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  Background="{DynamicResource MainBackgroundColor}"
+
+
+
+
 
 
 
@@ -20111,7 +26761,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  BorderBrush="{DynamicResource BorderColor}"
+
+
+
+
 
 
 
@@ -20119,7 +26777,15 @@ $inputXML = @'
 
 
 
+
+
+
+
                                  Text="准备就绪。请选择一?Windows 11 ISO 开始?
+
+
+
+
 
 
 
@@ -20131,7 +26797,19 @@ $inputXML = @'
 
 
 
+
+
+
+
+
+
+
+
                 </Grid>
+
+
+
+
 
 
 
@@ -20139,7 +26817,15 @@ $inputXML = @'
 
 
 
+
+
+
+
         </TabControl>
+
+
+
+
 
 
 
@@ -20147,7 +26833,15 @@ $inputXML = @'
 
 
 
+
+
+
+
 </Window>
+
+
+
+
 
 
 
