@@ -3,6 +3,7 @@
 # Configuration folder
 .vscode/
 .idea/
+.github/
 
 ### Visual Studio ###
 
