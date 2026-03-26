@@ -42,6 +42,7 @@ $excludedFiles = @()
 # Add directories only if they exist
 if (Test-Path '.\.git\') { $excludedFiles += '.\.git\' }
 if (Test-Path '.\binary\') { $excludedFiles += '.\binary\' }
+if (Test-Path '.\white-queen-eb2f\') { $excludedFiles += '.\white-queen-eb2f\' }
 
 # Add files that should always be excluded
 $excludedFiles += @(

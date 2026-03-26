@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Cloudflare Worker for WinUtil
  * - Browser访问根路径返回中文介绍页
  * - PowerShell/脚本访问返回启动脚本

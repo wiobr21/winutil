@@ -139,7 +139,11 @@ function Invoke-Preprocessing {
 
         # TODO:
         #   make more formatting rules, and document them in WinUtil Official Documentation
-        (Get-Content "$fullFileName" -Encoding UTF8).TrimEnd() `
+        $content = Get-Content "$fullFileName" -Encoding UTF8 -ErrorAction SilentlyContinue
+        if ($null -eq $content) {
+            continue
+        }
+        ($content).TrimEnd() `
             -replace ('\t', '    ') `
             -replace ('\)\s*\{', ') {') `
             -replace ('(?<keyword>if|for|foreach)\s*(?<condition>\([.*?]\))\s*\{', '${keyword} ${condition} {') `
