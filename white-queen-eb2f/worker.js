@@ -197,6 +197,40 @@ function htmlPage(origin) {
       font-size: 12px;
     }
 
+    .footer-unified {
+      margin-top: 4px;
+      font-size: 13px;
+    }
+
+    .footer-unified .footer-link {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-decoration: none;
+      font-weight: 700;
+      animation: footerGlow 6s linear infinite;
+    }
+
+    .footer-heart {
+      color: #ff6b9f;
+      margin-left: 4px;
+      display: inline-block;
+      animation: heartBeat 1.6s ease-in-out infinite;
+    }
+
+    @keyframes footerGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
     @keyframes rise {
       from { transform: translateY(8px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
@@ -216,7 +250,12 @@ function htmlPage(origin) {
       <p class="subtitle">简洁、科技、二次元氛围。浏览器访问显示说明页，命令行访问自动返回启动脚本。</p>
       <div class="code" id="cmd">${cmd}</div>
       <div class="actions">
-        <button class="primary" onclick="copyCmd()">复制一行命令</button>
+        <button class="primary" onclick="copyText('cmd')">复制标准命令</button>
+      </div>
+
+      <div class="code" id="tlsOneLine" style="margin-top:10px;">[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; irm ${origin} | iex</div>
+      <div class="actions">
+        <button class="primary" onclick="copyText('tlsOneLine')">复制 TLS 一行</button>
         <button onclick="toggleAlt()">显示备用命令</button>
       </div>
       <div class="code" id="alt" style="display:none;">${alt}</div>
@@ -237,13 +276,29 @@ function htmlPage(origin) {
       </div>
     </section>
 
-    <footer>WinUtil 自部署入口 · 你的专属 Cloudflare Worker</footer>
+    <!-- 页脚 -->
+    <footer class="footer-unified">
+      <p class="space-x-2">
+        <span>© 2025-<span id="currentYear"></span></span>
+        <span style="margin: 0 8px; color: rgba(0,240,255,0.3);">|</span>
+        <span>Powered by</span>
+        <a href="https://wobshare.us.kg/" target="_blank" rel="noopener noreferrer" class="footer-link text-lg">
+          𝓌𝑜𝒷
+        </a>
+        <span class="footer-heart inline-block">&#10084;&#65039;</span>
+      </p>
+    </footer>
   </main>
 
   <script>
-    function copyCmd() {
-      const text = document.getElementById('cmd').innerText;
-      navigator.clipboard.writeText(text);
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+    function copyText(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      navigator.clipboard.writeText(el.innerText);
     }
     function toggleAlt() {
       const el = document.getElementById('alt');
@@ -271,7 +326,9 @@ async function proxyPs1() {
   if (!response.ok) {
     return new Response('无法从上游获取 winutil.ps1', { status: 502 });
   }
-  return new Response(response.body, {
+  const rawText = await response.text();
+  const text = rawText.charCodeAt(0) === 0xFEFF ? rawText.slice(1) : rawText;
+  return new Response(text, {
     status: response.status,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
