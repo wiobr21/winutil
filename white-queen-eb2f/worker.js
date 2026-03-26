@@ -260,7 +260,10 @@ function loaderScript(origin) {
     `$ErrorActionPreference = 'Stop'\n` +
     `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n` +
     `$scriptUrl = '${scriptUrl}'\n` +
-    `irm $scriptUrl | iex\n`;
+    `$content = irm $scriptUrl\n` +
+    `$text = if ($content -is [byte[]]) { [Text.Encoding]::UTF8.GetString($content) } else { [string]$content }\n` +
+    `if ($text.Length -gt 0 -and $text[0] -eq [char]0xFEFF) { $text = $text.Substring(1) }\n` +
+    `iex $text\n`;
 }
 
 async function proxyPs1() {
