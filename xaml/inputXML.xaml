@@ -1394,7 +1394,7 @@
                                 <StackPanel Grid.Column="0" Margin="5,5,15,5">
                                     <TextBlock FontSize="{DynamicResource FontSize}" FontWeight="Bold"
                                                Foreground="{DynamicResource MainForegroundColor}" Margin="0,0,0,8">
-                                        Step 1 - Select Windows 11 ISO
+                                        步骤 1 - 选择 Windows 11 ISO
                                     </TextBlock>
                                     <TextBlock FontSize="{DynamicResource FontSize}" Foreground="{DynamicResource MainForegroundColor}"
                                                TextWrapping="Wrap" Margin="0,0,0,6">
@@ -1416,12 +1416,12 @@
                                                  VerticalAlignment="Center"
                                                  Padding="6,4"
                                                  Margin="0,0,6,0"
-                                                 Text="No ISO selected..."
+                                                 Text="尚未选择 ISO..."
                                                  Foreground="{DynamicResource MainForegroundColor}"
                                                  Background="{DynamicResource MainBackgroundColor}"/>
                                         <Button Grid.Column="1"
                                                 Name="WPFWin11ISOBrowseButton"
-                                                Content="Browse"
+                                                Content="浏览"
                                                 Width="Auto" Padding="12,0"
                                                 Height="{DynamicResource ButtonHeight}"/>
                                     </Grid>
@@ -1442,19 +1442,19 @@
                                     <StackPanel>
                                         <TextBlock FontSize="{DynamicResource FontSize}" FontWeight="Bold"
                                                    Foreground="OrangeRed" Margin="0,0,0,10">
-                                            !!WARNING!! You must use an official Microsoft ISO
+                                            !!警告!! 必须使用微软官方 ISO
                                         </TextBlock>
                                         <TextBlock FontSize="{DynamicResource FontSize}"
                                                    Foreground="{DynamicResource MainForegroundColor}"
                                                    TextWrapping="Wrap" Margin="0,0,0,8">
-                                            Download the Windows 11 ISO directly from Microsoft.com.
+                                            请直接从 Microsoft.com 下载 Windows 11 ISO。
                                             Third-party, pre-modified, or unofficial images are not supported
                                             and may produce broken results.
                                         </TextBlock>
                                         <TextBlock FontSize="{DynamicResource FontSize}"
                                                    Foreground="{DynamicResource MainForegroundColor}"
                                                    TextWrapping="Wrap" Margin="0,0,0,6">
-                                            On the Microsoft download page, choose:
+                                            在微软下载页面请选择：
                                         </TextBlock>
                                         <TextBlock FontSize="{DynamicResource FontSize}"
                                                    Foreground="{DynamicResource MainForegroundColor}"
@@ -1464,7 +1464,7 @@
                                             <LineBreak/>- Architecture : 64-bit (x64)
                                         </TextBlock>
                                         <Button Name="WPFWin11ISODownloadLink"
-                                                Content="Open Microsoft Download Page"
+                                                Content="打开微软下载页面"
                                                 HorizontalAlignment="Left"
                                                 Width="Auto" Padding="12,0"
                                                 Height="{DynamicResource ButtonHeight}"/>
@@ -1585,7 +1585,7 @@
                                             Foreground="OrangeRed"
                                             Width="Auto" Padding="12,0"
                                             Height="{DynamicResource ButtonHeight}"
-                                            ToolTip="Delete the temporary working directory and reset the interface back to Step 1"
+                                            ToolTip="删除临时工作目录并将界面重置回第 1 步"
                                             Margin="12,0,0,0"/>
                                 </Grid>
 
