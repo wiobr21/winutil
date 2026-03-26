@@ -6962,7 +6962,7 @@ CCC::::::::::::C         T:::::::::T            T:::::::::T
     Write-Host $asciiArt
 }
 
-$sync.configs.applications = @'
+$sync.configs['applications'] = @'
 {
     "WPFInstall1password":  {
                                 "category":  "Utilities",
@@ -10466,7 +10466,7 @@ $sync.configs.applications = @'
                       }
 }
 '@ | ConvertFrom-Json
-$sync.configs.appnavigation.en = @'
+$sync.configs['appnavigation.en'] = @'
 {
     "WPFInstall":  {
                        "Content":  "Install/Upgrade Applications",
@@ -10552,7 +10552,7 @@ $sync.configs.appnavigation.en = @'
                                }
 }
 '@ | ConvertFrom-Json
-$sync.configs.appnavigation = @'
+$sync.configs['appnavigation'] = @'
 {
     "WPFInstall":  {
                        "Content":  "安装/升级应用",
@@ -10638,7 +10638,7 @@ $sync.configs.appnavigation = @'
                                }
 }
 '@ | ConvertFrom-Json
-$sync.configs.dns = @'
+$sync.configs['dns'] = @'
 {
     "Google":  {
                    "Primary":  "8.8.8.8",
@@ -10690,7 +10690,7 @@ $sync.configs.dns = @'
                                            }
 }
 '@ | ConvertFrom-Json
-$sync.configs.feature.en = @'
+$sync.configs['feature.en'] = @'
 {
     "WPFFeaturesdotnet":  {
                               "Content":  "All .Net Framework (2,3,4)",
@@ -11010,7 +11010,7 @@ $sync.configs.feature.en = @'
                             }
 }
 '@ | ConvertFrom-Json
-$sync.configs.feature = @'
+$sync.configs['feature'] = @'
 {
     "WPFFeaturesdotnet":  {
                               "Content":  "所有 .Net 框架 (2,3,4)",
@@ -11330,7 +11330,7 @@ $sync.configs.feature = @'
                             }
 }
 '@ | ConvertFrom-Json
-$sync.configs.preset = @'
+$sync.configs['preset'] = @'
 {
     "Standard":  [
                      "WPFTweaksActivity",
@@ -11355,7 +11355,7 @@ $sync.configs.preset = @'
                 ]
 }
 '@ | ConvertFrom-Json
-$sync.configs.themes = @'
+$sync.configs['themes'] = @'
 {
     "shared":  {
                    "AppEntryWidth":  "200",
@@ -11481,7 +11481,7 @@ $sync.configs.themes = @'
              }
 }
 '@ | ConvertFrom-Json
-$sync.configs.tweaks.en = @'
+$sync.configs['tweaks.en'] = @'
 {
     "WPFTweaksActivity":  {
                               "Content":  "Disable Activity History",
@@ -13971,7 +13971,7 @@ $sync.configs.tweaks.en = @'
                                           }
 }
 '@ | ConvertFrom-Json
-$sync.configs.tweaks = @'
+$sync.configs['tweaks'] = @'
 {
     "WPFTweaksActivity":  {
                               "Content":  "禁用活动历史记录",

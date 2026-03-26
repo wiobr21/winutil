@@ -99,8 +99,9 @@ Get-ChildItem "config" | Where-Object {$psitem.extension -eq ".json"} | ForEach-
 $($jsonAsObject | ConvertTo-Json -Depth 3)
 "@
 
-    $sync.configs.$($psitem.BaseName) = $json | ConvertFrom-Json
-    $script_content.Add($(Write-Output "`$sync.configs.$($psitem.BaseName) = @'`r`n$json`r`n'@ `| ConvertFrom-Json" ))
+    $configKey = $psitem.BaseName
+    $sync.configs[$configKey] = $json | ConvertFrom-Json
+    $script_content.Add($(Write-Output "`$sync.configs['$configKey'] = @'`r`n$json`r`n'@ `| ConvertFrom-Json" ))
 }
 
 # Read the entire XAML file as a single string, preserving line breaks
