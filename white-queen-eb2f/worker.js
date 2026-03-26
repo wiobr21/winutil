@@ -246,8 +246,8 @@ function htmlPage(origin) {
 <body>
   <main class="wrap">
     <section class="hero">
-      <h1 class="title">WinUtil · 中文一键入口</h1>
-      <p class="subtitle">简洁、科技、二次元氛围。浏览器访问显示说明页，命令行访问自动返回启动脚本。</p>
+      <h1 class="title">WinUtil · 工具</h1>
+      <p class="subtitle"></p>
       <div class="code" id="cmd">${cmd}</div>
       <div class="actions">
         <button class="primary" onclick="copyText('cmd')">复制标准命令</button>
@@ -268,11 +268,11 @@ function htmlPage(origin) {
       </div>
       <div class="card">
         <h3>中文内容</h3>
-        <p>GUI 已完成简体中文翻译，应用列表描述也已中文化，便于快速理解与选择。</p>
+        <p>GUI 简体中文翻译，应用列表描述中文化，便于快速理解与选择。</p>
       </div>
       <div class="card">
         <h3>持续更新</h3>
-        <p>你更新 GitHub 上的 <code>winutil.ps1</code> 后，入口命令无需改动即可生效。</p>
+        <p>持续更新 GitHub 上的 WinUtil 项目，入口命令无需改动即可生效。</p>
       </div>
     </section>
 
