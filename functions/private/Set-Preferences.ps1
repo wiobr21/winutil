@@ -1,4 +1,4 @@
-function Set-Preferences{
+﻿function Set-Preferences{
 
     param(
         [switch]$save=$false
@@ -61,6 +61,9 @@ function Set-Preferences{
         }
         if ($null -eq $sync.preferences.packagemanager) {
             $sync.preferences.packagemanager = "Winget"
+        }
+        if ($null -eq $sync.preferences.language) {
+            $sync.preferences.language = "zh-CN"
         }
 
         # convert packagemanager to enum

@@ -1,4 +1,4 @@
-# Create enums
+﻿# Create enums
 Add-Type @"
 public enum PackageManagers
 {
@@ -177,6 +177,9 @@ Invoke-WPFUIElements -configVariable $sync.configs.feature -targetGridName "feat
 #===========================================================================
 
 $xaml.SelectNodes("//*[@Name]") | ForEach-Object {$sync["$("$($psitem.Name)")"] = $sync["Form"].FindName($psitem.Name)}
+
+# Apply language preference after UI elements are available
+Invoke-WinutilLanguageChange -language $sync.preferences.language
 
 #Persist Package Manager preference across winutil restarts
 $sync.ChocoRadioButton.Add_Checked({
@@ -471,6 +474,16 @@ $sync["LightThemeMenuItem"].Add_Click({
 $sync["SettingsButton"].Add_Click({
     Write-Debug "SettingsButton clicked"
     Invoke-WPFPopup -PopupActionTable @{ "Settings" = "Toggle"; "Theme" = "Hide"; "FontScaling" = "Hide" }
+})
+$sync["LanguageZHMenuItem"].Add_Click({
+    Write-Debug "LanguageZHMenuItem clicked"
+    Invoke-WPFPopup -Action "Hide" -Popups @("Settings")
+    Invoke-WinutilLanguageChange -language "zh-CN"
+})
+$sync["LanguageENMenuItem"].Add_Click({
+    Write-Debug "LanguageENMenuItem clicked"
+    Invoke-WPFPopup -Action "Hide" -Popups @("Settings")
+    Invoke-WinutilLanguageChange -language "en-US"
 })
 $sync["ImportMenuItem"].Add_Click({
     Write-Debug "Import clicked"
