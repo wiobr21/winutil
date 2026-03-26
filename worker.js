@@ -10,7 +10,8 @@ const RAW_PS1_URL = 'https://raw.githubusercontent.com/wiobr21/winutil/main/winu
 function isBrowser(request) {
   const accept = request.headers.get('accept') || '';
   const ua = request.headers.get('user-agent') || '';
-  return accept.includes('text/html') || /Mozilla|Chrome|Safari|Edge/i.test(ua);
+  const isCli = /PowerShell|curl|Wget|wget|HTTPie|WinHTTP|aria2|OpenAI|okhttp/i.test(ua);
+  return accept.includes('text/html') && !isCli;
 }
 
 function htmlPage(origin) {
@@ -285,7 +286,7 @@ export default {
       return proxyPs1();
     }
 
-    if (isBrowser(request) || url.searchParams.has('html')) {
+    if ((isBrowser(request) || url.searchParams.has('html')) && !url.searchParams.has('raw')) {
       return new Response(htmlPage(origin), {
         headers: {
           'Content-Type': 'text/html; charset=utf-8',
