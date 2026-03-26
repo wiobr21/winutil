@@ -1,4 +1,4 @@
-param (
+﻿param (
     [switch]$Run,
     [string]$Arguments
 )
@@ -66,12 +66,23 @@ $script_content.Add($(Get-Content "scripts\start.ps1").replace('#{replaceme}',"$
 
 Update-Progress "Adding: Functions" 20
 Get-ChildItem "functions" -Recurse -File | ForEach-Object {
-    $script_content.Add($(Get-Content $psitem.FullName))
+    $script_content.Add($(Get-Content $psitem.FullName -Encoding UTF8))
     }
 Update-Progress "Adding: Config *.json" 40
 Get-ChildItem "config" | Where-Object {$psitem.extension -eq ".json"} | ForEach-Object {
-    $json = (Get-Content $psitem.FullName -Raw)
-    $jsonAsObject = $json | ConvertFrom-Json
+    $configPath = $psitem.FullName
+    try {
+        $json = (Get-Content $configPath -Raw -Encoding UTF8)
+    } catch {
+        Write-Host "WARNING: Failed to read $configPath as UTF8 due to $($_.Exception.Message). Falling back to default encoding."
+        $json = (Get-Content $configPath -Raw)
+    }
+    try {
+        $jsonAsObject = $json | ConvertFrom-Json
+    } catch {
+        Write-Host "PARSE ERROR: $configPath"
+        throw
+    }
 
     # Add 'WPFInstall' as a prefix to every entry-name in 'applications.json' file
     if ($psitem.Name -eq "applications.json") {
@@ -92,7 +103,7 @@ $($jsonAsObject | ConvertTo-Json -Depth 3)
 }
 
 # Read the entire XAML file as a single string, preserving line breaks
-$xaml = Get-Content "$workingdir\xaml\inputXML.xaml" -Raw
+$xaml = Get-Content "$workingdir\xaml\inputXML.xaml" -Raw -Encoding UTF8
 
 Update-Progress "Adding: Xaml " 90
 
@@ -104,7 +115,7 @@ $xaml
 "@)
 
 Update-Progress "Adding: autounattend.xml" 95
-$autounattendRaw = Get-Content "$workingdir\tools\autounattend.xml" -Raw
+$autounattendRaw = Get-Content "$workingdir\tools\autounattend.xml" -Raw -Encoding UTF8
 # Strip XML comments (<!-- ... -->, including multi-line)
 $autounattendRaw = [regex]::Replace($autounattendRaw, '<!--.*?-->', '', [System.Text.RegularExpressions.RegexOptions]::Singleline)
 # Drop blank lines and trim trailing whitespace per line
@@ -124,7 +135,7 @@ Remove-Item "xaml\inputApp.xaml" -ErrorAction SilentlyContinue
 Remove-Item "xaml\inputTweaks.xaml" -ErrorAction SilentlyContinue
 Remove-Item "xaml\inputFeatures.xaml" -ErrorAction SilentlyContinue
 
-Set-Content -Path "$scriptname" -Value ($script_content -join "`r`n") -Encoding ascii
+Set-Content -Path "$scriptname" -Value ($script_content -join "`r`n") -Encoding UTF8
 Write-Progress -Activity "Compiling" -Completed
 
 Update-Progress -Activity "Validating" -StatusMessage "Checking winutil.ps1 Syntax" -Percent 0
