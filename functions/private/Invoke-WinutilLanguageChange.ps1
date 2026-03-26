@@ -62,6 +62,15 @@
             Search = @{
                 ToolTip = "按 Ctrl+F 并输入应用名称以过滤下方列表。按 Esc 重置筛选"
             }
+            Tweaks = @{
+                Recommended = "推荐选项："
+                Standard = "标准"
+                Minimal = "最小"
+                Clear = "清除"
+                GetInstalled = "获取已安装调整"
+                Run = "运行调整"
+                Undo = "撤销所选调整"
+            }
         }
         "en-US" = @{
             Menu = @{
@@ -115,6 +124,15 @@
             }
             Search = @{
                 ToolTip = "Press Ctrl+F and type an app name to filter. Press Esc to reset."
+            }
+            Tweaks = @{
+                Recommended = "Recommended Selections:"
+                Standard = "Standard"
+                Minimal = "Minimal"
+                Clear = "Clear"
+                GetInstalled = "Get Installed Tweaks"
+                Run = "Run Tweaks"
+                Undo = "Undo Selected Tweaks"
             }
         }
     }
@@ -179,4 +197,95 @@
 
     # Search bar tooltip
     Set-UiProp "SearchBar" "ToolTip" $lang.Search.ToolTip
+
+    # Tweaks tab quick buttons
+    Set-UiProp "WPFstandard" "Content" (" " + $lang.Tweaks.Standard + " ")
+    Set-UiProp "WPFminimal" "Content" (" " + $lang.Tweaks.Minimal + " ")
+    Set-UiProp "WPFClearTweaksSelection" "Content" (" " + $lang.Tweaks.Clear + " ")
+    Set-UiProp "WPFGetInstalledTweaks" "Content" (" " + $lang.Tweaks.GetInstalled + " ")
+    Set-UiProp "WPFTweaksbutton" "Content" $lang.Tweaks.Run
+    Set-UiProp "WPFUndoall" "Content" $lang.Tweaks.Undo
+
+    # Update category labels using available configs for chosen language
+    $tweaksConfig = if ($language -eq "en-US" -and $sync.configs.'tweaks.en') { $sync.configs.'tweaks.en' } else { $sync.configs.tweaks }
+    $featureConfig = if ($language -eq "en-US" -and $sync.configs.'feature.en') { $sync.configs.'feature.en' } else { $sync.configs.feature }
+    $appnavConfig = if ($language -eq "en-US" -and $sync.configs.'appnavigation.en') { $sync.configs.'appnavigation.en' } else { $sync.configs.appnavigation }
+
+    $tweaksCategoryMapEnToZh = @{
+        'Essential Tweaks' = '基础调整'
+        'Advanced Tweaks - CAUTION' = '高级调整 - 注意'
+        'Security Tweaks' = '安全调整'
+        'Undo Tweaks' = '撤销调整'
+        'Dev Tweaks' = '开发者调整'
+        'Privacy Tweaks' = '隐私调整'
+        'Updates Tweaks' = '更新调整'
+    }
+    $tweaksCategoryMapZhToEn = @{}
+    foreach ($k in $tweaksCategoryMapEnToZh.Keys) { $tweaksCategoryMapZhToEn[$tweaksCategoryMapEnToZh[$k]] = $k }
+
+    $featureCategoryMapEnToZh = @{
+        'Features' = '系统功能'
+        'Advanced Features' = '高级功能'
+    }
+    $featureCategoryMapZhToEn = @{}
+    foreach ($k in $featureCategoryMapEnToZh.Keys) { $featureCategoryMapZhToEn[$featureCategoryMapEnToZh[$k]] = $k }
+
+    $appnavCategoryMapEnToZh = @{
+        '____Actions' = '操作'
+        '__Package Manager' = '包管理器'
+        '__Selection' = '选择'
+    }
+    $appnavCategoryMapZhToEn = @{}
+    foreach ($k in $appnavCategoryMapEnToZh.Keys) { $appnavCategoryMapZhToEn[$appnavCategoryMapEnToZh[$k]] = $k }
+
+    foreach ($entry in $tweaksConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.category) {
+            if ($sync.ContainsKey($item.category)) {
+                Set-UiProp $item.category "Content" ($item.category -replace ".*__", "")
+            } elseif ($tweaksCategoryMapEnToZh.ContainsKey($item.category) -and $sync.ContainsKey($tweaksCategoryMapEnToZh[$item.category])) {
+                Set-UiProp $tweaksCategoryMapEnToZh[$item.category] "Content" $item.category
+            } elseif ($tweaksCategoryMapZhToEn.ContainsKey($item.category) -and $sync.ContainsKey($tweaksCategoryMapZhToEn[$item.category])) {
+                Set-UiProp $tweaksCategoryMapZhToEn[$item.category] "Content" $item.category
+            }
+        }
+    }
+
+    foreach ($entry in $featureConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.category) {
+            if ($sync.ContainsKey($item.category)) {
+                Set-UiProp $item.category "Content" ($item.category -replace ".*__", "")
+            } elseif ($featureCategoryMapEnToZh.ContainsKey($item.category) -and $sync.ContainsKey($featureCategoryMapEnToZh[$item.category])) {
+                Set-UiProp $featureCategoryMapEnToZh[$item.category] "Content" $item.category
+            } elseif ($featureCategoryMapZhToEn.ContainsKey($item.category) -and $sync.ContainsKey($featureCategoryMapZhToEn[$item.category])) {
+                Set-UiProp $featureCategoryMapZhToEn[$item.category] "Content" $item.category
+            }
+        }
+    }
+
+    foreach ($entry in $appnavConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.Category) {
+            if ($sync.ContainsKey($item.Category)) {
+                Set-UiProp $item.Category "Content" ($item.Category -replace ".*__", "")
+            } elseif ($appnavCategoryMapEnToZh.ContainsKey($item.Category) -and $sync.ContainsKey($appnavCategoryMapEnToZh[$item.Category])) {
+                Set-UiProp $appnavCategoryMapEnToZh[$item.Category] "Content" ($item.Category -replace ".*__", "")
+            } elseif ($appnavCategoryMapZhToEn.ContainsKey($item.Category) -and $sync.ContainsKey($appnavCategoryMapZhToEn[$item.Category])) {
+                Set-UiProp $appnavCategoryMapZhToEn[$item.Category] "Content" $item.Category
+            }
+        }
+    }
 }

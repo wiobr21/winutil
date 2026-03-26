@@ -3207,6 +3207,15 @@ function Invoke-WinutilLanguageChange {
             Search = @{
                 ToolTip = "按 Ctrl+F 并输入应用名称以过滤下方列表。按 Esc 重置筛选"
             }
+            Tweaks = @{
+                Recommended = "推荐选项："
+                Standard = "标准"
+                Minimal = "最小"
+                Clear = "清除"
+                GetInstalled = "获取已安装调整"
+                Run = "运行调整"
+                Undo = "撤销所选调整"
+            }
         }
         "en-US" = @{
             Menu = @{
@@ -3260,6 +3269,15 @@ function Invoke-WinutilLanguageChange {
             }
             Search = @{
                 ToolTip = "Press Ctrl+F and type an app name to filter. Press Esc to reset."
+            }
+            Tweaks = @{
+                Recommended = "Recommended Selections:"
+                Standard = "Standard"
+                Minimal = "Minimal"
+                Clear = "Clear"
+                GetInstalled = "Get Installed Tweaks"
+                Run = "Run Tweaks"
+                Undo = "Undo Selected Tweaks"
             }
         }
     }
@@ -3324,6 +3342,97 @@ function Invoke-WinutilLanguageChange {
 
     # Search bar tooltip
     Set-UiProp "SearchBar" "ToolTip" $lang.Search.ToolTip
+
+    # Tweaks tab quick buttons
+    Set-UiProp "WPFstandard" "Content" (" " + $lang.Tweaks.Standard + " ")
+    Set-UiProp "WPFminimal" "Content" (" " + $lang.Tweaks.Minimal + " ")
+    Set-UiProp "WPFClearTweaksSelection" "Content" (" " + $lang.Tweaks.Clear + " ")
+    Set-UiProp "WPFGetInstalledTweaks" "Content" (" " + $lang.Tweaks.GetInstalled + " ")
+    Set-UiProp "WPFTweaksbutton" "Content" $lang.Tweaks.Run
+    Set-UiProp "WPFUndoall" "Content" $lang.Tweaks.Undo
+
+    # Update category labels using available configs for chosen language
+    $tweaksConfig = if ($language -eq "en-US" -and $sync.configs.'tweaks.en') { $sync.configs.'tweaks.en' } else { $sync.configs.tweaks }
+    $featureConfig = if ($language -eq "en-US" -and $sync.configs.'feature.en') { $sync.configs.'feature.en' } else { $sync.configs.feature }
+    $appnavConfig = if ($language -eq "en-US" -and $sync.configs.'appnavigation.en') { $sync.configs.'appnavigation.en' } else { $sync.configs.appnavigation }
+
+    $tweaksCategoryMapEnToZh = @{
+        'Essential Tweaks' = '基础调整'
+        'Advanced Tweaks - CAUTION' = '高级调整 - 注意'
+        'Security Tweaks' = '安全调整'
+        'Undo Tweaks' = '撤销调整'
+        'Dev Tweaks' = '开发者调整'
+        'Privacy Tweaks' = '隐私调整'
+        'Updates Tweaks' = '更新调整'
+    }
+    $tweaksCategoryMapZhToEn = @{}
+    foreach ($k in $tweaksCategoryMapEnToZh.Keys) { $tweaksCategoryMapZhToEn[$tweaksCategoryMapEnToZh[$k]] = $k }
+
+    $featureCategoryMapEnToZh = @{
+        'Features' = '系统功能'
+        'Advanced Features' = '高级功能'
+    }
+    $featureCategoryMapZhToEn = @{}
+    foreach ($k in $featureCategoryMapEnToZh.Keys) { $featureCategoryMapZhToEn[$featureCategoryMapEnToZh[$k]] = $k }
+
+    $appnavCategoryMapEnToZh = @{
+        '____Actions' = '操作'
+        '__Package Manager' = '包管理器'
+        '__Selection' = '选择'
+    }
+    $appnavCategoryMapZhToEn = @{}
+    foreach ($k in $appnavCategoryMapEnToZh.Keys) { $appnavCategoryMapZhToEn[$appnavCategoryMapEnToZh[$k]] = $k }
+
+    foreach ($entry in $tweaksConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.category) {
+            if ($sync.ContainsKey($item.category)) {
+                Set-UiProp $item.category "Content" ($item.category -replace ".*__", "")
+            } elseif ($tweaksCategoryMapEnToZh.ContainsKey($item.category) -and $sync.ContainsKey($tweaksCategoryMapEnToZh[$item.category])) {
+                Set-UiProp $tweaksCategoryMapEnToZh[$item.category] "Content" $item.category
+            } elseif ($tweaksCategoryMapZhToEn.ContainsKey($item.category) -and $sync.ContainsKey($tweaksCategoryMapZhToEn[$item.category])) {
+                Set-UiProp $tweaksCategoryMapZhToEn[$item.category] "Content" $item.category
+            }
+        }
+    }
+
+    foreach ($entry in $featureConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.category) {
+            if ($sync.ContainsKey($item.category)) {
+                Set-UiProp $item.category "Content" ($item.category -replace ".*__", "")
+            } elseif ($featureCategoryMapEnToZh.ContainsKey($item.category) -and $sync.ContainsKey($featureCategoryMapEnToZh[$item.category])) {
+                Set-UiProp $featureCategoryMapEnToZh[$item.category] "Content" $item.category
+            } elseif ($featureCategoryMapZhToEn.ContainsKey($item.category) -and $sync.ContainsKey($featureCategoryMapZhToEn[$item.category])) {
+                Set-UiProp $featureCategoryMapZhToEn[$item.category] "Content" $item.category
+            }
+        }
+    }
+
+    foreach ($entry in $appnavConfig.PSObject.Properties) {
+        $item = $entry.Value
+        if ($sync.ContainsKey($entry.Name)) {
+            Set-UiProp $entry.Name "Content" $item.Content
+            Set-UiProp $entry.Name "ToolTip" $item.Description
+        }
+        if ($item.Category) {
+            if ($sync.ContainsKey($item.Category)) {
+                Set-UiProp $item.Category "Content" ($item.Category -replace ".*__", "")
+            } elseif ($appnavCategoryMapEnToZh.ContainsKey($item.Category) -and $sync.ContainsKey($appnavCategoryMapEnToZh[$item.Category])) {
+                Set-UiProp $appnavCategoryMapEnToZh[$item.Category] "Content" ($item.Category -replace ".*__", "")
+            } elseif ($appnavCategoryMapZhToEn.ContainsKey($item.Category) -and $sync.ContainsKey($appnavCategoryMapZhToEn[$item.Category])) {
+                Set-UiProp $appnavCategoryMapZhToEn[$item.Category] "Content" $item.Category
+            }
+        }
+    }
 }
 function Invoke-WinUtilScript {
     <#
@@ -10357,7 +10466,7 @@ $sync.configs.applications = @'
                       }
 }
 '@ | ConvertFrom-Json
-$sync.configs.appnavigation = @'
+$sync.configs.appnavigation.en = @'
 {
     "WPFInstall":  {
                        "Content":  "Install/Upgrade Applications",
@@ -10443,6 +10552,92 @@ $sync.configs.appnavigation = @'
                                }
 }
 '@ | ConvertFrom-Json
+$sync.configs.appnavigation = @'
+{
+    "WPFInstall":  {
+                       "Content":  "安装/升级应用",
+                       "Category":  "操作",
+                       "Type":  "Button",
+                       "Order":  "1",
+                       "Description":  "安装或升级所选应用"
+                   },
+    "WPFUninstall":  {
+                         "Content":  "卸载应用",
+                         "Category":  "操作",
+                         "Type":  "Button",
+                         "Order":  "2",
+                         "Description":  "卸载所选应用"
+                     },
+    "WPFInstallUpgrade":  {
+                              "Content":  "升级所有应用",
+                              "Category":  "操作",
+                              "Type":  "Button",
+                              "Order":  "3",
+                              "Description":  "升级全部应用至最新版本"
+                          },
+    "WingetRadioButton":  {
+                              "Content":  "Winget",
+                              "Category":  "包管理器",
+                              "Type":  "RadioButton",
+                              "GroupName":  "PackageManagerGroup",
+                              "Checked":  true,
+                              "Order":  "1",
+                              "Description":  "使用 Winget 进行包管理"
+                          },
+    "ChocoRadioButton":  {
+                             "Content":  "Chocolatey",
+                             "Category":  "包管理器",
+                             "Type":  "RadioButton",
+                             "GroupName":  "PackageManagerGroup",
+                             "Checked":  false,
+                             "Order":  "2",
+                             "Description":  "使用 Chocolatey 进行包管理"
+                         },
+    "WPFCollapseAllCategories":  {
+                                     "Content":  "折叠全部分类",
+                                     "Category":  "选择",
+                                     "Type":  "Button",
+                                     "Order":  "1",
+                                     "Description":  "折叠所有应用分类"
+                                 },
+    "WPFExpandAllCategories":  {
+                                   "Content":  "展开全部分类",
+                                   "Category":  "选择",
+                                   "Type":  "Button",
+                                   "Order":  "2",
+                                   "Description":  "展开所有应用分类"
+                               },
+    "WPFClearInstallSelection":  {
+                                     "Content":  "清除选择",
+                                     "Category":  "选择",
+                                     "Type":  "Button",
+                                     "Order":  "3",
+                                     "Description":  "清除已选择的应用"
+                                 },
+    "WPFGetInstalled":  {
+                            "Content":  "显示已安装应用",
+                            "Category":  "选择",
+                            "Type":  "Button",
+                            "Order":  "4",
+                            "Description":  "显示已安装的应用"
+                        },
+    "WPFselectedAppsButton":  {
+                                  "Content":  "已选应用：0",
+                                  "Category":  "选择",
+                                  "Type":  "Button",
+                                  "Order":  "5",
+                                  "Description":  "查看当前已选择的应用"
+                              },
+    "WPFToggleFOSSHighlight":  {
+                                   "Content":  "高亮 FOSS",
+                                   "Category":  "选择",
+                                   "Type":  "Toggle",
+                                   "Checked":  true,
+                                   "Order":  "6",
+                                   "Description":  "切换开源软件高亮显示"
+                               }
+}
+'@ | ConvertFrom-Json
 $sync.configs.dns = @'
 {
     "Google":  {
@@ -10495,7 +10690,7 @@ $sync.configs.dns = @'
                                            }
 }
 '@ | ConvertFrom-Json
-$sync.configs.feature = @'
+$sync.configs.feature.en = @'
 {
     "WPFFeaturesdotnet":  {
                               "Content":  "All .Net Framework (2,3,4)",
@@ -10815,6 +11010,326 @@ $sync.configs.feature = @'
                             }
 }
 '@ | ConvertFrom-Json
+$sync.configs.feature = @'
+{
+    "WPFFeaturesdotnet":  {
+                              "Content":  "所有 .Net 框架 (2,3,4)",
+                              "Description":  ".NET 和 .NET Framework 是一个开发人员平台，由用于构建许多不同类型的应用程序的工具、编程语言和库组成。",
+                              "category":  "系统功能",
+                              "panel":  "1",
+                              "feature":  [
+                                              "NetFx4-AdvSrvs",
+                                              "NetFx3"
+                                          ],
+                              "InvokeScript":  [
+
+                                               ],
+                              "link":  "https://winutil.christitus.com/dev/features/features/dotnet"
+                          },
+    "WPFFeatureshyperv":  {
+                              "Content":  "HyperV 虚拟化",
+                              "Description":  "Hyper-V是微软开发的硬件虚拟化产品，允许用户创建和管理虚拟机。",
+                              "category":  "系统功能",
+                              "panel":  "1",
+                              "feature":  [
+                                              "Microsoft-Hyper-V-All"
+                                          ],
+                              "InvokeScript":  [
+                                                   "bcdedit /set hypervisorschedulertype classic"
+                                               ],
+                              "link":  "https://winutil.christitus.com/dev/features/features/hyperv"
+                          },
+    "WPFFeatureslegacymedia":  {
+                                   "Content":  "传统媒体（WMP、DirectPlay）",
+                                   "Description":  "启用以前版本的 Windows 中的旧程序。",
+                                   "category":  "系统功能",
+                                   "panel":  "1",
+                                   "feature":  [
+                                                   "WindowsMediaPlayer",
+                                                   "MediaPlayback",
+                                                   "DirectPlay",
+                                                   "LegacyComponents"
+                                               ],
+                                   "InvokeScript":  [
+
+                                                    ],
+                                   "link":  "https://winutil.christitus.com/dev/features/features/legacymedia"
+                               },
+    "WPFFeaturewsl":  {
+                          "Content":  "Linux 的 Windows 子系统",
+                          "Description":  "适用于 Linux 的 Windows 子系统是 Windows 的一项可选功能，它允许 Linux 程序在 Windows 上本机运行，无需单独的虚拟机或双启动。",
+                          "category":  "系统功能",
+                          "panel":  "1",
+                          "feature":  [
+                                          "VirtualMachinePlatform",
+                                          "Microsoft-Windows-Subsystem-Linux"
+                                      ],
+                          "InvokeScript":  [
+
+                                           ],
+                          "link":  "https://winutil.christitus.com/dev/features/features/wsl"
+                      },
+    "WPFFeaturenfs":  {
+                          "Content":  "NFS——网络文件系统",
+                          "Description":  "网络文件系统 (NFS) 是一种在网络上存储文件的机制。",
+                          "category":  "系统功能",
+                          "panel":  "1",
+                          "feature":  [
+                                          "ServicesForNFS-ClientOnly",
+                                          "ClientForNFS-Infrastructure",
+                                          "NFS-Administration"
+                                      ],
+                          "InvokeScript":  [
+                                               "nfsadmin client stop",
+                                               "Set-ItemProperty -Path \u0027HKLM:\\SOFTWARE\\Microsoft\\ClientForNFS\\CurrentVersion\\Default\u0027 -Name \u0027AnonymousUID\u0027 -Type DWord -Value 0",
+                                               "Set-ItemProperty -Path \u0027HKLM:\\SOFTWARE\\Microsoft\\ClientForNFS\\CurrentVersion\\Default\u0027 -Name \u0027AnonymousGID\u0027 -Type DWord -Value 0",
+                                               "nfsadmin client start",
+                                               "nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i"
+                                           ],
+                          "link":  "https://winutil.christitus.com/dev/features/features/nfs"
+                      },
+    "WPFFeatureRegBackup":  {
+                                "Content":  "启用每日注册表备份任务 12.30am",
+                                "Description":  "启用每日注册表备份，此前 Microsoft 在 Windows 10 1803 中禁用了该功能。",
+                                "category":  "系统功能",
+                                "panel":  "1",
+                                "feature":  [
+
+                                            ],
+                                "InvokeScript":  [
+                                                     "\r\n      New-ItemProperty -Path \u0027HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Configuration Manager\u0027 -Name \u0027EnablePeriodicBackup\u0027 -Type DWord -Value 1 -Force\r\n      New-ItemProperty -Path \u0027HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Configuration Manager\u0027 -Name \u0027BackupCount\u0027 -Type DWord -Value 2 -Force\r\n      $action = New-ScheduledTaskAction -Execute \u0027schtasks\u0027 -Argument \u0027/run /i /tn \"\\Microsoft\\Windows\\Registry\\RegIdleBackup\"\u0027\r\n      $trigger = New-ScheduledTaskTrigger -Daily -At 00:30\r\n      Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \u0027AutoRegBackup\u0027 -Description \u0027Create System Registry Backups\u0027 -User \u0027System\u0027\r\n      "
+                                                 ],
+                                "link":  "https://winutil.christitus.com/dev/features/features/regbackup"
+                            },
+    "WPFFeatureEnableLegacyRecovery":  {
+                                           "Content":  "启用旧版 F8 引导恢复",
+                                           "Description":  "启用“高级启动选项”屏幕，让您可以在高级故障排除模式下启动 Windows。",
+                                           "category":  "系统功能",
+                                           "panel":  "1",
+                                           "feature":  [
+
+                                                       ],
+                                           "InvokeScript":  [
+                                                                "bcdedit /set bootmenupolicy legacy"
+                                                            ],
+                                           "link":  "https://winutil.christitus.com/dev/features/features/enablelegacyrecovery"
+                                       },
+    "WPFFeatureDisableLegacyRecovery":  {
+                                            "Content":  "禁用旧版 F8 引导恢复",
+                                            "Description":  "禁用“高级启动选项”屏幕，该屏幕可让您以高级故障排除模式启动 Windows。",
+                                            "category":  "系统功能",
+                                            "panel":  "1",
+                                            "feature":  [
+
+                                                        ],
+                                            "InvokeScript":  [
+                                                                 "bcdedit /set bootmenupolicy standard"
+                                                             ],
+                                            "link":  "https://winutil.christitus.com/dev/features/features/disablelegacyrecovery"
+                                        },
+    "WPFFeaturesSandbox":  {
+                               "Content":  "Windows沙箱",
+                               "Description":  "Windows Sandbox 是一种轻量级虚拟机，它提供临时桌面环境以安全地隔离运行应用程序和程序。",
+                               "category":  "系统功能",
+                               "panel":  "1",
+                               "feature":  [
+                                               "Containers-DisposableClientVM"
+                                           ],
+                               "link":  "https://winutil.christitus.com/dev/features/features/sandbox"
+                           },
+    "WPFFeatureInstall":  {
+                              "Content":  "安装功能",
+                              "category":  "系统功能",
+                              "panel":  "1",
+                              "Type":  "Button",
+                              "ButtonWidth":  "300",
+                              "function":  "Invoke-WPFFeatureInstall",
+                              "link":  "https://winutil.christitus.com/dev/features/features/install"
+                          },
+    "WPFPanelAutologin":  {
+                              "Content":  "设置自动登录",
+                              "category":  "Fixes",
+                              "panel":  "1",
+                              "Type":  "Button",
+                              "ButtonWidth":  "300",
+                              "function":  "Invoke-WPFPanelAutologin",
+                              "link":  "https://winutil.christitus.com/dev/features/fixes/autologin"
+                          },
+    "WPFFixesUpdate":  {
+                           "Content":  "重置 Windows 更新",
+                           "category":  "Fixes",
+                           "panel":  "1",
+                           "Type":  "Button",
+                           "ButtonWidth":  "300",
+                           "function":  "Invoke-WPFFixesUpdate",
+                           "link":  "https://winutil.christitus.com/dev/features/fixes/update"
+                       },
+    "WPFFixesNetwork":  {
+                            "Content":  "重置网络",
+                            "category":  "Fixes",
+                            "panel":  "1",
+                            "Type":  "Button",
+                            "ButtonWidth":  "300",
+                            "function":  "Invoke-WPFFixesNetwork",
+                            "link":  "https://winutil.christitus.com/dev/features/fixes/network"
+                        },
+    "WPFPanelDISM":  {
+                         "Content":  "系统损坏扫描",
+                         "category":  "Fixes",
+                         "panel":  "1",
+                         "Type":  "Button",
+                         "ButtonWidth":  "300",
+                         "function":  "Invoke-WPFSystemRepair",
+                         "link":  "https://winutil.christitus.com/dev/features/fixes/dism"
+                     },
+    "WPFFixesWinget":  {
+                           "Content":  "WinGet重新安装",
+                           "category":  "Fixes",
+                           "panel":  "1",
+                           "Type":  "Button",
+                           "ButtonWidth":  "300",
+                           "function":  "Invoke-WPFFixesWinget",
+                           "link":  "https://winutil.christitus.com/dev/features/fixes/winget"
+                       },
+    "WPFPanelControl":  {
+                            "Content":  "控制面板",
+                            "category":  "Legacy Windows Panels",
+                            "panel":  "2",
+                            "Type":  "Button",
+                            "ButtonWidth":  "300",
+                            "InvokeScript":  [
+                                                 "control"
+                                             ],
+                            "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/control"
+                        },
+    "WPFPanelComputer":  {
+                             "Content":  "电脑管理",
+                             "category":  "Legacy Windows Panels",
+                             "panel":  "2",
+                             "Type":  "Button",
+                             "ButtonWidth":  "300",
+                             "InvokeScript":  [
+                                                  "compmgmt.msc"
+                                              ],
+                             "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/computer"
+                         },
+    "WPFPanelNetwork":  {
+                            "Content":  "网络连接",
+                            "category":  "Legacy Windows Panels",
+                            "panel":  "2",
+                            "Type":  "Button",
+                            "ButtonWidth":  "300",
+                            "InvokeScript":  [
+                                                 "ncpa.cpl"
+                                             ],
+                            "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/network"
+                        },
+    "WPFPanelPower":  {
+                          "Content":  "电源面板",
+                          "category":  "Legacy Windows Panels",
+                          "panel":  "2",
+                          "Type":  "Button",
+                          "ButtonWidth":  "300",
+                          "InvokeScript":  [
+                                               "powercfg.cpl"
+                                           ],
+                          "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/power"
+                      },
+    "WPFPanelPrinter":  {
+                            "Content":  "打印机面板",
+                            "category":  "Legacy Windows Panels",
+                            "panel":  "2",
+                            "Type":  "Button",
+                            "ButtonWidth":  "300",
+                            "InvokeScript":  [
+                                                 "Start-Process \u0027shell:::{A8A91A66-3A7D-4424-8D24-04E180695C7A}\u0027"
+                                             ],
+                            "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/printer"
+                        },
+    "WPFPanelRegion":  {
+                           "Content":  "地区",
+                           "category":  "Legacy Windows Panels",
+                           "panel":  "2",
+                           "Type":  "Button",
+                           "ButtonWidth":  "300",
+                           "InvokeScript":  [
+                                                "intl.cpl"
+                                            ],
+                           "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/region"
+                       },
+    "WPFPanelRestore":  {
+                            "Content":  "Windows 恢复",
+                            "category":  "Legacy Windows Panels",
+                            "panel":  "2",
+                            "Type":  "Button",
+                            "ButtonWidth":  "300",
+                            "InvokeScript":  [
+                                                 "rstrui.exe"
+                                             ],
+                            "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/restore"
+                        },
+    "WPFPanelSound":  {
+                          "Content":  "声音设置",
+                          "category":  "Legacy Windows Panels",
+                          "panel":  "2",
+                          "Type":  "Button",
+                          "ButtonWidth":  "300",
+                          "InvokeScript":  [
+                                               "mmsys.cpl"
+                                           ],
+                          "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/sound"
+                      },
+    "WPFPanelSystem":  {
+                           "Content":  "系统属性",
+                           "category":  "Legacy Windows Panels",
+                           "panel":  "2",
+                           "Type":  "Button",
+                           "ButtonWidth":  "300",
+                           "InvokeScript":  [
+                                                "sysdm.cpl"
+                                            ],
+                           "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/system"
+                       },
+    "WPFPanelTimedate":  {
+                             "Content":  "时间和日期",
+                             "category":  "Legacy Windows Panels",
+                             "panel":  "2",
+                             "Type":  "Button",
+                             "ButtonWidth":  "300",
+                             "InvokeScript":  [
+                                                  "timedate.cpl"
+                                              ],
+                             "link":  "https://winutil.christitus.com/dev/features/legacy-windows-panels/timedate"
+                         },
+    "WPFWinUtilInstallPSProfile":  {
+                                       "Content":  "安装 CTT PowerShell 配置文件",
+                                       "category":  "Powershell Profile Powershell 7+ Only",
+                                       "panel":  "2",
+                                       "Type":  "Button",
+                                       "ButtonWidth":  "300",
+                                       "function":  "Invoke-WinUtilInstallPSProfile",
+                                       "link":  "https://winutil.christitus.com/dev/features/powershell-profile-powershell-7--only/installpsprofile"
+                                   },
+    "WPFWinUtilUninstallPSProfile":  {
+                                         "Content":  "卸载 CTT PowerShell 配置文件",
+                                         "category":  "Powershell Profile Powershell 7+ Only",
+                                         "panel":  "2",
+                                         "Type":  "Button",
+                                         "ButtonWidth":  "300",
+                                         "function":  "Invoke-WinUtilUninstallPSProfile",
+                                         "link":  "https://winutil.christitus.com/dev/features/powershell-profile-powershell-7--only/uninstallpsprofile"
+                                     },
+    "WPFWinUtilSSHServer":  {
+                                "Content":  "启用 OpenSSH 服务器",
+                                "category":  "Remote Access",
+                                "panel":  "2",
+                                "Type":  "Button",
+                                "ButtonWidth":  "300",
+                                "function":  "Invoke-WPFSSHServer",
+                                "link":  "https://winutil.christitus.com/dev/features/remote-access/sshserver"
+                            }
+}
+'@ | ConvertFrom-Json
 $sync.configs.preset = @'
 {
     "Standard":  [
@@ -10966,7 +11481,7 @@ $sync.configs.themes = @'
              }
 }
 '@ | ConvertFrom-Json
-$sync.configs.tweaks = @'
+$sync.configs.tweaks.en = @'
 {
     "WPFTweaksActivity":  {
                               "Content":  "Disable Activity History",
@@ -13456,6 +13971,2496 @@ $sync.configs.tweaks = @'
                                           }
 }
 '@ | ConvertFrom-Json
+$sync.configs.tweaks = @'
+{
+    "WPFTweaksActivity":  {
+                              "Content":  "禁用活动历史记录",
+                              "Description":  "擦除最近的文档、剪贴板和运行历史记录。",
+                              "category":  "基础调整",
+                              "panel":  "1",
+                              "registry":  [
+                                               {
+                                                   "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+                                                   "Name":  "EnableActivityFeed",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                               },
+                                               {
+                                                   "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+                                                   "Name":  "PublishUserActivities",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                               },
+                                               {
+                                                   "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+                                                   "Name":  "UploadUserActivities",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                               }
+                                           ],
+                              "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/activity"
+                          },
+    "WPFTweaksHiber":  {
+                           "Content":  "禁用休眠",
+                           "Description":  "休眠实际上适用于笔记本电脑，因为它会在关闭电脑之前保存内存中的内容。它真的不应该被使用。",
+                           "category":  "基础调整",
+                           "panel":  "1",
+                           "registry":  [
+                                            {
+                                                "Path":  "HKLM:\\System\\CurrentControlSet\\Control\\Session Manager\\Power",
+                                                "Name":  "HibernateEnabled",
+                                                "Value":  "0",
+                                                "Type":  "DWord",
+                                                "OriginalValue":  "1"
+                                            },
+                                            {
+                                                "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FlyoutMenuSettings",
+                                                "Name":  "ShowHibernateOption",
+                                                "Value":  "0",
+                                                "Type":  "DWord",
+                                                "OriginalValue":  "1"
+                                            }
+                                        ],
+                           "InvokeScript":  [
+                                                "powercfg.exe /hibernate off"
+                                            ],
+                           "UndoScript":  [
+                                              "powercfg.exe /hibernate on"
+                                          ],
+                           "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/hiber"
+                       },
+    "WPFTweaksWidget":  {
+                            "Content":  "删除小部件",
+                            "Description":  "删除任务栏左下角烦人的小部件。",
+                            "category":  "基础调整",
+                            "panel":  "1",
+                            "InvokeScript":  [
+                                                 "\r\n      # Sometimes if you dont stop the Widgets process the removal may fail\r\n\r\n      Stop-Process -Name Widgets\r\n      Get-AppxPackage Microsoft.WidgetsPlatformRuntime -AllUsers | Remove-AppxPackage -AllUsers\r\n      Get-AppxPackage MicrosoftWindows.Client.WebExperience -AllUsers | Remove-AppxPackage -AllUsers\r\n\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      Write-Host \"Removed widgets\"\r\n      "
+                                             ],
+                            "UndoScript":  [
+                                               "\r\n      Write-Host \"Restoring widgets AppxPackages\"\r\n\r\n      Add-AppxPackage -Register \"C:\\Program Files\\WindowsApps\\Microsoft.WidgetsPlatformRuntime*\\AppxManifest.xml\" -DisableDevelopmentMode\r\n      Add-AppxPackage -Register \"C:\\Program Files\\WindowsApps\\MicrosoftWindows.Client.WebExperience*\\AppxManifest.xml\" -DisableDevelopmentMode\r\n\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                           ],
+                            "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/widget"
+                        },
+    "WPFTweaksRevertStartMenu":  {
+                                     "Content":  "恢复开始菜单布局",
+                                     "Description":  "恢复 25H2 逐步推出新开始菜单布局之前的旧开始菜单布局。",
+                                     "category":  "基础调整",
+                                     "panel":  "1",
+                                     "InvokeScript":  [
+                                                          "\r\n      Invoke-WebRequest https://github.com/thebookisclosed/ViVe/releases/download/v0.3.4/ViVeTool-v0.3.4-IntelAmd.zip -OutFile ViVeTool.zip\r\n\r\n      Expand-Archive ViVeTool.zip\r\n      Remove-Item ViVeTool.zip\r\n\r\n      Start-Process \u0027ViVeTool\\ViVeTool.exe\u0027 -ArgumentList \u0027/disable /id:47205210\u0027 -Wait -NoNewWindow\r\n\r\n      Remove-Item ViVeTool -Recurse\r\n\r\n      Write-Host \u0027Old start menu reverted please restart your computer to take effect\u0027\r\n      "
+                                                      ],
+                                     "UndoScript":  [
+                                                        "\r\n      Invoke-WebRequest https://github.com/thebookisclosed/ViVe/releases/download/v0.3.4/ViVeTool-v0.3.4-IntelAmd.zip -OutFile ViVeTool.zip\r\n\r\n      Expand-Archive ViVeTool.zip\r\n      Remove-Item ViVeTool.zip\r\n\r\n      Start-Process \u0027ViVeTool\\ViVeTool.exe\u0027 -ArgumentList \u0027/enable /id:47205210\u0027 -Wait -NoNewWindow\r\n\r\n      Remove-Item ViVeTool -Recurse\r\n\r\n      Write-Host \u0027New start menu reverted please restart your computer to take effect\u0027\r\n      "
+                                                    ],
+                                     "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/revertstartmenu"
+                                 },
+    "WPFTweaksDisableStoreSearch":  {
+                                        "Content":  "禁用 Microsoft Store 搜索结果",
+                                        "Description":  "在“开始”菜单中搜索应用程序时，不会显示推荐的 Microsoft Store 应用程序。",
+                                        "category":  "基础调整",
+                                        "panel":  "1",
+                                        "InvokeScript":  [
+                                                             "icacls \"$Env:LocalAppData\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\LocalState\\store.db\" /deny Everyone:F"
+                                                         ],
+                                        "UndoScript":  [
+                                                           "icacls \"$Env:LocalAppData\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\LocalState\\store.db\" /grant Everyone:F"
+                                                       ],
+                                        "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/disablestoresearch"
+                                    },
+    "WPFTweaksLocation":  {
+                              "Content":  "禁用位置跟踪",
+                              "Description":  "禁用位置跟踪。",
+                              "category":  "基础调整",
+                              "panel":  "1",
+                              "registry":  [
+                                               {
+                                                   "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+                                                   "Name":  "Value",
+                                                   "Value":  "Deny",
+                                                   "Type":  "String",
+                                                   "OriginalValue":  "Allow"
+                                               },
+                                               {
+                                                   "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Sensor\\Overrides\\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}",
+                                                   "Name":  "SensorPermissionState",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "1"
+                                               },
+                                               {
+                                                   "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\lfsvc\\Service\\Configuration",
+                                                   "Name":  "Status",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "1"
+                                               },
+                                               {
+                                                   "Path":  "HKLM:\\SYSTEM\\Maps",
+                                                   "Name":  "AutoUpdateEnabled",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "1"
+                                               }
+                                           ],
+                              "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/location"
+                          },
+    "WPFTweaksServices":  {
+                              "Content":  "将服务设置为手动",
+                              "Description":  "将一堆不需要一直运行的系统服务转为手动。这是非常无害的，就像需要该服务一样，它只会根据需要启动。",
+                              "category":  "基础调整",
+                              "panel":  "1",
+                              "service":  [
+                                              {
+                                                  "Name":  "ALG",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "AppMgmt",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "AppReadiness",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "AppVClient",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "Appinfo",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "AssignedAccessManagerSvc",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "AudioEndpointBuilder",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "AudioSrv",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "Audiosrv",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "AxInstSV",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "BDESVC",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "BITS",
+                                                  "StartupType":  "AutomaticDelayedStart",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "BTAGService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "BthAvctpSvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "CDPSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "COMSysApp",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "CertPropSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "CryptSvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "CscService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "DPS",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "DevQueryBroker",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "DeviceAssociationService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "DeviceInstall",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Dhcp",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "DiagTrack",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "DialogBlockingService",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "DispBrokerDesktopSvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "DisplayEnhancementService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "EFS",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "EapHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "EventLog",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "EventSystem",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "FDResPub",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "FontCache",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "FrameServer",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "FrameServerMonitor",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "GraphicsPerfSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "HvHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "IKEEXT",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "InstallService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "InventorySvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "IpxlatCfgSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "KeyIso",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "KtmRm",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "LanmanServer",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "LanmanWorkstation",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "LicenseManager",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "LxpSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "MSDTC",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "MSiSCSI",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "MapsBroker",
+                                                  "StartupType":  "AutomaticDelayedStart",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "McpManagementService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "MicrosoftEdgeElevationService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NaturalAuthentication",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NcaSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NcbService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NcdAutoSetup",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NetSetupSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NetTcpPortSharing",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "Netman",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "NlaSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "PcaSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "PeerDistSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "PerfHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "PhoneSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "PlugPlay",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "PolicyAgent",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Power",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "PrintNotify",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "ProfSvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "PushToInstall",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "QWAVE",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "RasAuto",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "RasMan",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "RemoteAccess",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "RemoteRegistry",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "RetailDemo",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "RmSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "RpcLocator",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SCPolicySvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SCardSvr",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SDRSVC",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SEMgrSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SENS",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "SNMPTRAP",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SNMPTrap",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SSDPSRV",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SamSs",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "ScDeviceEnum",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SensorDataService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SensorService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SensrSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SessionEnv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "SharedAccess",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "ShellHWDetection",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "SmsRouter",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Spooler",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "SstpSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "StiSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "StorSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "SysMain",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "TapiSrv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "TermService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Themes",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "TieringEngineService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "TokenBroker",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "TrkWks",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "TroubleshootingSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "TrustedInstaller",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "UevAgentService",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "UmRdpService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "UserManager",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "UsoSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "VSS",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "VaultSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "W32Time",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WEPHOSTSVC",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WFDSConMgrSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WMPNetworkSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WManSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WPDBusEnum",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WSAIFabricSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "WSearch",
+                                                  "StartupType":  "AutomaticDelayedStart",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "WalletService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WarpJITSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WbioSrvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Wcmsvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "WdiServiceHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WdiSystemHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WebClient",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Wecsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WerSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WiaRpc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WinRM",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "Winmgmt",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "WpcMonSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "WpnService",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "XblAuthManager",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "XblGameSave",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "XboxGipSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "XboxNetApiSvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "autotimesvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "bthserv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "camsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "cloudidsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "dcsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "defragsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "diagsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "dmwappushservice",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "dot3svc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "edgeupdate",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "edgeupdatem",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "fdPHost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "fhsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "hidserv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "icssvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "iphlpsvc",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "lfsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "lltdsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "lmhosts",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "netprofm",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "nsi",
+                                                  "StartupType":  "Automatic",
+                                                  "OriginalType":  "Automatic"
+                                              },
+                                              {
+                                                  "Name":  "perceptionsimulation",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "pla",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "seclogon",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "shpamsvc",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "smphost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "ssh-agent",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "svsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "swprv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "tzautoupdate",
+                                                  "StartupType":  "Disabled",
+                                                  "OriginalType":  "Disabled"
+                                              },
+                                              {
+                                                  "Name":  "upnphost",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vds",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicguestinterface",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicheartbeat",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmickvpexchange",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicrdv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicshutdown",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmictimesync",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicvmsession",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "vmicvss",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wbengine",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wcncsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "webthreatdefsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wercplsupport",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wisvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wlidsvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wlpasvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wmiApSrv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "workfolderssvc",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              },
+                                              {
+                                                  "Name":  "wuauserv",
+                                                  "StartupType":  "Manual",
+                                                  "OriginalType":  "Manual"
+                                              }
+                                          ],
+                              "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/services"
+                          },
+    "WPFTweaksBraveDebloat":  {
+                                  "Content":  "勇敢的消肿",
+                                  "Description":  "禁用各种烦恼，例如 Brave Rewards、Leo AI、加密钱包和 VPN。",
+                                  "category":  "z__Advanced Tweaks - CAUTION",
+                                  "panel":  "1",
+                                  "registry":  [
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                                       "Name":  "BraveRewardsDisabled",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                   },
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                                       "Name":  "BraveWalletDisabled",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                   },
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                                       "Name":  "BraveVPNDisabled",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                   },
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                                       "Name":  "BraveAIChatEnabled",
+                                                       "Value":  "0",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                   },
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                                       "Name":  "BraveStatsPingEnabled",
+                                                       "Value":  "0",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                   }
+                                               ],
+                                  "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/bravedebloat"
+                              },
+    "WPFTweaksEdgeDebloat":  {
+                                 "Content":  "边缘膨胀",
+                                 "Description":  "禁用 Edge 中的各种遥测选项、弹出窗口和其他烦恼。",
+                                 "category":  "z__Advanced Tweaks - CAUTION",
+                                 "panel":  "1",
+                                 "registry":  [
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+                                                      "Name":  "CreateDesktopShortcutDefault",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "PersonalizationReportingEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge\\ExtensionInstallBlocklist",
+                                                      "Name":  "1",
+                                                      "Value":  "ofefcgjbeghpigppfmkologfjadafddi",
+                                                      "Type":  "String",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "ShowRecommendationsEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "HideFirstRunExperience",
+                                                      "Value":  "1",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "UserFeedbackAllowed",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "ConfigureDoNotTrack",
+                                                      "Value":  "1",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "AlternateErrorPagesEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "EdgeCollectionsEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "EdgeShoppingAssistantEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "MicrosoftEdgeInsiderPromotionEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "ShowMicrosoftRewards",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "WebWidgetAllowed",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "DiagnosticData",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "EdgeAssetDeliveryServiceEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  },
+                                                  {
+                                                      "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                                      "Name":  "WalletDonationEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                  }
+                                              ],
+                                 "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/edgedebloat"
+                             },
+    "WPFTweaksConsumerFeatures":  {
+                                      "Content":  "禁用消费者功能",
+                                      "Description":  "Windows 不会为登录用户自动安装任何游戏、第三方应用程序或 Windows 应用商店中的应用程序链接。某些默认应用程序将无法访问（例如电话链接）。",
+                                      "category":  "基础调整",
+                                      "panel":  "1",
+                                      "registry":  [
+                                                       {
+                                                           "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+                                                           "Name":  "DisableWindowsConsumerFeatures",
+                                                           "Value":  "1",
+                                                           "Type":  "DWord",
+                                                           "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                       }
+                                                   ],
+                                      "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/consumerfeatures"
+                                  },
+    "WPFTweaksTelemetry":  {
+                               "Content":  "禁用遥测",
+                               "Description":  "禁用 Microsoft 遥测。",
+                               "category":  "基础调整",
+                               "panel":  "1",
+                               "registry":  [
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+                                                    "Name":  "Enabled",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+                                                    "Name":  "TailoredExperiencesWithDiagnosticDataEnabled",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Speech_OneCore\\Settings\\OnlineSpeechPrivacy",
+                                                    "Name":  "HasAccepted",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Input\\TIPC",
+                                                    "Name":  "Enabled",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\InputPersonalization",
+                                                    "Name":  "RestrictImplicitInkCollection",
+                                                    "Value":  "1",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\InputPersonalization",
+                                                    "Name":  "RestrictImplicitTextCollection",
+                                                    "Value":  "1",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\InputPersonalization\\TrainedDataStore",
+                                                    "Name":  "HarvestContacts",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Personalization\\Settings",
+                                                    "Name":  "AcceptedPrivacyPolicy",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection",
+                                                    "Name":  "AllowTelemetry",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                    "Name":  "Start_TrackProgs",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+                                                    "Name":  "PublishUserActivities",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                },
+                                                {
+                                                    "Path":  "HKCU:\\Software\\Microsoft\\Siuf\\Rules",
+                                                    "Name":  "NumberOfSIUFInPeriod",
+                                                    "Value":  "0",
+                                                    "Type":  "DWord",
+                                                    "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                }
+                                            ],
+                               "InvokeScript":  [
+                                                    "\r\n      # Disable Defender Auto Sample Submission\r\n      Set-MpPreference -SubmitSamplesConsent 2\r\n\r\n      # Disable (Connected User Experiences and Telemetry) Service\r\n      Set-Service -Name diagtrack -StartupType Disabled\r\n\r\n      # Disable (Windows Error Reporting Manager) Service\r\n      Set-Service -Name wermgr -StartupType Disabled\r\n\r\n      $Memory = (Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum / 1KB\r\n      Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\" -Name SvcHostSplitThresholdInKB -Value $Memory\r\n\r\n      Remove-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Siuf\\Rules\" -Name PeriodInNanoSeconds\r\n      "
+                                                ],
+                               "UndoScript":  [
+                                                  "\r\n      # Enable Defender Auto Sample Submission\r\n      Set-MpPreference -SubmitSamplesConsent 1\r\n\r\n      # Enable (Connected User Experiences and Telemetry) Service\r\n      Set-Service -Name diagtrack -StartupType Automatic\r\n\r\n      # Enable (Windows Error Reporting Manager) Service\r\n      Set-Service -Name wermgr -StartupType Automatic\r\n      "
+                                              ],
+                               "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/telemetry"
+                           },
+    "WPFTweaksRemoveEdge":  {
+                                "Content":  "删除微软边缘",
+                                "Description":  "取消阻止 Microsoft Edge 卸载程序限制，然后使用该卸载程序删除 Microsoft Edge。",
+                                "category":  "z__Advanced Tweaks - CAUTION",
+                                "panel":  "1",
+                                "InvokeScript":  [
+                                                     "Invoke-WinUtilRemoveEdge"
+                                                 ],
+                                "UndoScript":  [
+                                                   "\r\n      Write-Host \u0027Installing Microsoft Edge...\u0027\r\n      winget install Microsoft.Edge --source winget\r\n      "
+                                               ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/removeedge"
+                            },
+    "WPFTweaksUTC":  {
+                         "Content":  "将时间设置为 UTC（双启动）",
+                         "Description":  "对于双启动计算机至关重要。修复了与 Linux 系统的时间同步。",
+                         "category":  "z__Advanced Tweaks - CAUTION",
+                         "panel":  "1",
+                         "registry":  [
+                                          {
+                                              "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation",
+                                              "Name":  "RealTimeIsUniversal",
+                                              "Value":  "1",
+                                              "Type":  "QWord",
+                                              "OriginalValue":  "0"
+                                          }
+                                      ],
+                         "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/utc"
+                     },
+    "WPFTweaksRemoveOneDrive":  {
+                                    "Content":  "删除 OneDrive",
+                                    "Description":  "拒绝删除 OneDrive 用户文件的权限，然后使用其自己的卸载程序将其删除，然后恢复原始权限。",
+                                    "category":  "z__Advanced Tweaks - CAUTION",
+                                    "panel":  "1",
+                                    "InvokeScript":  [
+                                                         "\r\n      # Deny permission to remove OneDrive folder\r\n      icacls $Env:OneDrive /deny \"Administrators:(D,DC)\"\r\n\r\n      Write-Host \"Uninstalling OneDrive...\"\r\n      Start-Process \u0027C:\\Windows\\System32\\OneDriveSetup.exe\u0027 -ArgumentList \u0027/uninstall\u0027 -Wait\r\n\r\n      # Some of OneDrive files use explorer, and OneDrive uses FileCoAuth\r\n      Write-Host \"Removing leftover OneDrive Files...\"\r\n      Stop-Process -Name FileCoAuth,Explorer\r\n      Remove-Item \"$Env:LocalAppData\\Microsoft\\OneDrive\" -Recurse -Force\r\n      Remove-Item \"C:\\ProgramData\\Microsoft OneDrive\" -Recurse -Force\r\n\r\n      # Grant back permission to accses OneDrive folder\r\n      icacls $Env:OneDrive /grant \"Administrators:(D,DC)\"\r\n\r\n      # Disable OneSyncSvc\r\n      Set-Service -Name OneSyncSvc -StartupType Disabled\r\n      "
+                                                     ],
+                                    "UndoScript":  [
+                                                       "\r\n      Write-Host \"Installing OneDrive\"\r\n      winget install Microsoft.Onedrive --source winget\r\n\r\n      # Enabled OneSyncSvc\r\n      Set-Service -Name OneSyncSvc -StartupType Automatic\r\n      "
+                                                   ],
+                                    "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/removeonedrive"
+                                },
+    "WPFTweaksRemoveHome":  {
+                                "Content":  "从资源管理器中删除主页",
+                                "Description":  "从资源管理器中删除主页并将此电脑设置为默认值。",
+                                "category":  "z__Advanced Tweaks - CAUTION",
+                                "panel":  "1",
+                                "InvokeScript":  [
+                                                     "\r\n      Remove-Item \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}\"\r\n      Set-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" -Name LaunchTo -Value 1\r\n      "
+                                                 ],
+                                "UndoScript":  [
+                                                   "\r\n      New-Item \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}\"\r\n      Set-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" -Name LaunchTo -Value 0\r\n      "
+                                               ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/removehome"
+                            },
+    "WPFTweaksRemoveGallery":  {
+                                   "Content":  "从资源管理器中删除图库",
+                                   "Description":  "从资源管理器中删除图库并将此电脑设置为默认值。",
+                                   "category":  "z__Advanced Tweaks - CAUTION",
+                                   "panel":  "1",
+                                   "InvokeScript":  [
+                                                        "\r\n      Remove-Item \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}\"\r\n      "
+                                                    ],
+                                   "UndoScript":  [
+                                                      "\r\n      New-Item \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Desktop\\NameSpace\\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}\"\r\n      "
+                                                  ],
+                                   "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/removegallery"
+                               },
+    "WPFTweaksDisplay":  {
+                             "Content":  "设置性能显示",
+                             "Description":  "将系统首选项设置为性能。您也可以使用 sysdm.cpl 手动执行此操作。",
+                             "category":  "z__Advanced Tweaks - CAUTION",
+                             "panel":  "1",
+                             "registry":  [
+                                              {
+                                                  "Path":  "HKCU:\\Control Panel\\Desktop",
+                                                  "Name":  "DragFullWindows",
+                                                  "Value":  "0",
+                                                  "Type":  "String",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Control Panel\\Desktop",
+                                                  "Name":  "MenuShowDelay",
+                                                  "Value":  "200",
+                                                  "Type":  "String",
+                                                  "OriginalValue":  "400"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Control Panel\\Desktop\\WindowMetrics",
+                                                  "Name":  "MinAnimate",
+                                                  "Value":  "0",
+                                                  "Type":  "String",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Control Panel\\Keyboard",
+                                                  "Name":  "KeyboardDelay",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "ListviewAlphaSelect",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "ListviewShadow",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "TaskbarAnimations",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
+                                                  "Name":  "VisualFXSetting",
+                                                  "Value":  "3",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\DWM",
+                                                  "Name":  "EnableAeroPeek",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "TaskbarMn",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "ShowTaskViewButton",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                                                  "Name":  "SearchboxTaskbarMode",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              }
+                                          ],
+                             "InvokeScript":  [
+                                                  "Set-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"UserPreferencesMask\" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))"
+                                              ],
+                             "UndoScript":  [
+                                                "Remove-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"UserPreferencesMask\""
+                                            ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/display"
+                         },
+    "WPFTweaksXboxRemoval":  {
+                                 "Content":  "删除 Xbox 和游戏组件",
+                                 "Description":  "删除 Xbox 服务、Xbox 应用程序、游戏栏和相关身份验证组件。",
+                                 "category":  "z__Advanced Tweaks - CAUTION",
+                                 "panel":  "1",
+                                 "registry":  [
+                                                  {
+                                                      "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+                                                      "Name":  "AppCaptureEnabled",
+                                                      "Value":  "0",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "1"
+                                                  }
+                                              ],
+                                 "appx":  [
+                                              "Microsoft.XboxIdentityProvider",
+                                              "Microsoft.XboxSpeechToTextOverlay",
+                                              "Microsoft.GamingApp",
+                                              "Microsoft.Xbox.TCUI",
+                                              "Microsoft.XboxGamingOverlay"
+                                          ],
+                                 "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/xboxremoval"
+                             },
+    "WPFTweaksDeBloat":  {
+                             "Content":  "删除所有 MS Store 应用程序 - 不推荐",
+                             "Description":  "谨慎使用！这将删除所有 Microsoft Store 应用程序。",
+                             "category":  "z__Advanced Tweaks - CAUTION",
+                             "panel":  "1",
+                             "appx":  [
+                                          "Microsoft.Microsoft3DViewer",
+                                          "Microsoft.AppConnector",
+                                          "Microsoft.BingFinance",
+                                          "Microsoft.BingNews",
+                                          "Microsoft.BingSports",
+                                          "Microsoft.BingTranslator",
+                                          "Microsoft.BingWeather",
+                                          "Microsoft.BingFoodAndDrink",
+                                          "Microsoft.BingHealthAndFitness",
+                                          "Microsoft.BingTravel",
+                                          "Clipchamp.Clipchamp",
+                                          "Microsoft.Todos",
+                                          "MicrosoftCorporationII.QuickAssist",
+                                          "Microsoft.MicrosoftStickyNotes",
+                                          "Microsoft.GetHelp",
+                                          "Microsoft.GetStarted",
+                                          "Microsoft.Messaging",
+                                          "Microsoft.MicrosoftSolitaireCollection",
+                                          "Microsoft.NetworkSpeedTest",
+                                          "Microsoft.News",
+                                          "Microsoft.Office.Lens",
+                                          "Microsoft.Office.Sway",
+                                          "Microsoft.Office.OneNote",
+                                          "Microsoft.OneConnect",
+                                          "Microsoft.People",
+                                          "Microsoft.Print3D",
+                                          "Microsoft.SkypeApp",
+                                          "Microsoft.Wallet",
+                                          "Microsoft.Whiteboard",
+                                          "Microsoft.WindowsAlarms",
+                                          "Microsoft.WindowsCommunicationsApps",
+                                          "Microsoft.WindowsFeedbackHub",
+                                          "Microsoft.WindowsMaps",
+                                          "Microsoft.WindowsSoundRecorder",
+                                          "Microsoft.ConnectivityStore",
+                                          "Microsoft.ScreenSketch",
+                                          "Microsoft.MixedReality.Portal",
+                                          "Microsoft.ZuneMusic",
+                                          "Microsoft.ZuneVideo",
+                                          "Microsoft.MicrosoftOfficeHub",
+                                          "MsTeams",
+                                          "*EclipseManager*",
+                                          "*ActiproSoftwareLLC*",
+                                          "*AdobeSystemsIncorporated.AdobePhotoshopExpress*",
+                                          "*Duolingo-LearnLanguagesforFree*",
+                                          "*PandoraMediaInc*",
+                                          "*CandyCrush*",
+                                          "*BubbleWitch3Saga*",
+                                          "*Wunderlist*",
+                                          "*Flipboard*",
+                                          "*Twitter*",
+                                          "*Facebook*",
+                                          "*Royal Revolt*",
+                                          "*Sway*",
+                                          "*Speed Test*",
+                                          "*Dolby*",
+                                          "*Viber*",
+                                          "*ACGMediaPlayer*",
+                                          "*Netflix*",
+                                          "*OneCalendar*",
+                                          "*LinkedInForWindows*",
+                                          "*HiddenCityMysteryofShadows*",
+                                          "*Hulu*",
+                                          "*HiddenCity*",
+                                          "*AdobePhotoshopExpress*",
+                                          "*HotspotShieldFreeVPN*",
+                                          "*Microsoft.Advertising.Xaml*"
+                                      ],
+                             "InvokeScript":  [
+                                                  "\r\n      $TeamsPath = \"$Env:LocalAppData\\Microsoft\\Teams\\Update.exe\"\r\n\r\n      if (Test-Path $TeamsPath) {\r\n        Write-Host \"Uninstalling Teams\"\r\n        Start-Process $TeamsPath -ArgumentList -uninstall -wait\r\n\r\n        Write-Host \"Deleting Teams directory\"\r\n        Remove-Item $TeamsPath -Recurse -Force\r\n      }\r\n      "
+                                              ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/debloat"
+                         },
+    "WPFTweaksRestorePoint":  {
+                                  "Content":  "创建还原点",
+                                  "Description":  "在运行时创建一个还原点，以防需要从 WinUtil 修改恢复。",
+                                  "category":  "基础调整",
+                                  "panel":  "1",
+                                  "Checked":  "False",
+                                  "registry":  [
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore",
+                                                       "Name":  "SystemRestorePointCreationFrequency",
+                                                       "Value":  "0",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "1440"
+                                                   }
+                                               ],
+                                  "InvokeScript":  [
+                                                       "\r\n      if (-not (Get-ComputerRestorePoint)) {\r\n          Enable-ComputerRestore -Drive $Env:SystemDrive\r\n      }\r\n\r\n      Checkpoint-Computer -Description \"System Restore Point created by WinUtil\" -RestorePointType MODIFY_SETTINGS\r\n      Write-Host \"System Restore Point Created Successfully\" -ForegroundColor Green\r\n      "
+                                                   ],
+                                  "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/restorepoint"
+                              },
+    "WPFTweaksEndTaskOnTaskbar":  {
+                                      "Content":  "通过右键单击启用结束任务",
+                                      "Description":  "右键单击任务栏中的程序时启用结束任务的选项。",
+                                      "category":  "基础调整",
+                                      "panel":  "1",
+                                      "registry":  [
+                                                       {
+                                                           "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings",
+                                                           "Name":  "TaskbarEndTask",
+                                                           "Value":  "1",
+                                                           "Type":  "DWord",
+                                                           "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                       }
+                                                   ],
+                                      "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/endtaskontaskbar"
+                                  },
+    "WPFTweaksPowershell7Tele":  {
+                                     "Content":  "禁用 Powershell 7 遥测",
+                                     "Description":  "创建一个名为“POWERSHELL_TELEMETRY_OPTOUT”的环境变量，其值为“1”，这将告诉 PowerShell 7 不要发送遥测数据。",
+                                     "category":  "基础调整",
+                                     "panel":  "1",
+                                     "InvokeScript":  [
+                                                          "[Environment]::SetEnvironmentVariable(\u0027POWERSHELL_TELEMETRY_OPTOUT\u0027, \u00271\u0027, \u0027Machine\u0027)"
+                                                      ],
+                                     "UndoScript":  [
+                                                        "[Environment]::SetEnvironmentVariable(\u0027POWERSHELL_TELEMETRY_OPTOUT\u0027, \u0027\u0027, \u0027Machine\u0027)"
+                                                    ],
+                                     "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/powershell7tele"
+                                 },
+    "WPFTweaksStorage":  {
+                             "Content":  "禁用存储感知",
+                             "Description":  "Storage Sense 自动删除临时文件。",
+                             "category":  "z__Advanced Tweaks - CAUTION",
+                             "panel":  "1",
+                             "registry":  [
+                                              {
+                                                  "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy",
+                                                  "Name":  "01",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1"
+                                              }
+                                          ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/storage"
+                         },
+    "WPFTweaksRemoveCopilot":  {
+                                   "Content":  "禁用 Microsoft Copilot",
+                                   "Description":  "自 23H2 起禁用 Windows 内置的 MS Copilot AI。",
+                                   "category":  "z__Advanced Tweaks - CAUTION",
+                                   "panel":  "1",
+                                   "registry":  [
+                                                    {
+                                                        "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+                                                        "Name":  "TurnOffWindowsCopilot",
+                                                        "Value":  "1",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+                                                        "Name":  "TurnOffWindowsCopilot",
+                                                        "Value":  "1",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                        "Name":  "ShowCopilotButton",
+                                                        "Value":  "0",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "1"
+                                                    },
+                                                    {
+                                                        "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\Shell\\Copilot",
+                                                        "Name":  "IsCopilotAvailable",
+                                                        "Value":  "0",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\Shell\\Copilot",
+                                                        "Name":  "CopilotDisabledReason",
+                                                        "Value":  "IsEnabledForGeographicRegionFailed",
+                                                        "Type":  "String",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsCopilot",
+                                                        "Name":  "AllowCopilotRuntime",
+                                                        "Value":  "0",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+                                                        "Name":  "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}",
+                                                        "Value":  "",
+                                                        "Type":  "String",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    },
+                                                    {
+                                                        "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\Shell\\Copilot\\BingChat",
+                                                        "Name":  "IsUserEligible",
+                                                        "Value":  "0",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                    }
+                                                ],
+                                   "InvokeScript":  [
+                                                        "\r\n      Write-Host \"Remove Copilot\"\r\n      Get-AppxPackage -AllUsers *Copilot* | Remove-AppxPackage -AllUsers\r\n      Get-AppxPackage -AllUsers Microsoft.MicrosoftOfficeHub | Remove-AppxPackage -AllUsers\r\n\r\n      $Appx = (Get-AppxPackage MicrosoftWindows.Client.CoreAI).PackageFullName\r\n\r\n      $Sid = (Get-LocalUser $Env:UserName).Sid.Value\r\n      New-Item \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Appx\\AppxAllUserStore\\EndOfLife\\$Sid\\$Appx\" -Force\r\n      Remove-AppxPackage $Appx\r\n      "
+                                                    ],
+                                   "UndoScript":  [
+                                                      "\r\n      Write-Host \"Install Copilot\"\r\n      winget install --name Copilot --source msstore --accept-package-agreements --accept-source-agreements --silent\r\n      "
+                                                  ],
+                                   "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/removecopilot"
+                               },
+    "WPFTweaksWPBT":  {
+                          "Content":  "禁用 Windows 平台二进制表 (WPBT)",
+                          "Description":  "如果启用，WPBT 允许您的计算机供应商在启动时执行程序，例如防盗软件、软件驱动程序以及在未经用户同意的情况下强制安装软件。带来潜在的安全风险。",
+                          "category":  "基础调整",
+                          "panel":  "1",
+                          "registry":  [
+                                           {
+                                               "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+                                               "Name":  "DisableWpbtExecution",
+                                               "Value":  "1",
+                                               "Type":  "DWord",
+                                               "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                           }
+                                       ],
+                          "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/wpbt"
+                      },
+    "WPFTweaksRazerBlock":  {
+                                "Content":  "阻止 Razer 软件安装",
+                                "Description":  "阻止所有 Razer 软件安装。硬件无需任何软件即可正常工作。",
+                                "category":  "z__Advanced Tweaks - CAUTION",
+                                "panel":  "1",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching",
+                                                     "Name":  "SearchOrderConfig",
+                                                     "Value":  "0",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "1"
+                                                 },
+                                                 {
+                                                     "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Installer",
+                                                     "Name":  "DisableCoInstallers",
+                                                     "Value":  "1",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "0"
+                                                 }
+                                             ],
+                                "InvokeScript":  [
+                                                     "\r\n      $RazerPath = \"C:\\Windows\\Installer\\Razer\"\r\n\r\n      if (Test-Path $RazerPath) {\r\n        Remove-Item $RazerPath\\* -Recurse -Force\r\n      }\r\n      else {\r\n        New-Item -Path $RazerPath -ItemType Directory\r\n      }\r\n\r\n      icacls $RazerPath /deny \"Everyone:(W)\"\r\n      "
+                                                 ],
+                                "UndoScript":  [
+                                                   "\r\n      icacls \"C:\\Windows\\Installer\\Razer\" /remove:d Everyone\r\n      "
+                                               ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/razerblock"
+                            },
+    "WPFTweaksDisableNotifications":  {
+                                          "Content":  "禁用通知托盘/日历",
+                                          "Description":  "禁用所有通知，包括日历。",
+                                          "category":  "z__Advanced Tweaks - CAUTION",
+                                          "panel":  "1",
+                                          "registry":  [
+                                                           {
+                                                               "Path":  "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                                               "Name":  "DisableNotificationCenter",
+                                                               "Value":  "1",
+                                                               "Type":  "DWord",
+                                                               "OriginalValue":  "\u003cRemoveEntry\u003e"
+                                                           },
+                                                           {
+                                                               "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                                                               "Name":  "ToastEnabled",
+                                                               "Value":  "0",
+                                                               "Type":  "DWord",
+                                                               "OriginalValue":  "1"
+                                                           }
+                                                       ],
+                                          "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/disablenotifications"
+                                      },
+    "WPFTweaksBlockAdobeNet":  {
+                                   "Content":  "Adobe 网络块",
+                                   "Description":  "通过有选择地阻止与 Adob​​e 激活和遥测服务器的连接来减少用户中断。图片来源：Ruddernation-Designs",
+                                   "category":  "z__Advanced Tweaks - CAUTION",
+                                   "panel":  "1",
+                                   "InvokeScript":  [
+                                                        "\r\n      $hostsUrl = \"https://github.com/Ruddernation-Designs/Adobe-URL-Block-List/raw/refs/heads/master/hosts\"\r\n      $hosts = \"$Env:SystemRoot\\System32\\drivers\\etc\\hosts\"\r\n\r\n      Move-Item $hosts \"$hosts.bak\"\r\n      Invoke-WebRequest $hostsUrl -OutFile $hosts\r\n      ipconfig /flushdns\r\n\r\n      Write-Host \"Added Adobe url block list from host file\"\r\n      "
+                                                    ],
+                                   "UndoScript":  [
+                                                      "\r\n      $hosts = \"$Env:SystemRoot\\System32\\drivers\\etc\\hosts\"\r\n\r\n      Remove-Item $hosts\r\n      Move-Item \"$hosts.bak\" $hosts\r\n      ipconfig /flushdns\r\n\r\n      Write-Host \"Removed Adobe url block list from host file\"\r\n      "
+                                                  ],
+                                   "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/blockadobenet"
+                               },
+    "WPFTweaksRightClickMenu":  {
+                                    "Content":  "设置经典右键菜单",
+                                    "Description":  "在文件资源管理器中右键单击时恢复经典上下文菜单，替换简化的 Windows 11 版本。",
+                                    "category":  "z__Advanced Tweaks - CAUTION",
+                                    "panel":  "1",
+                                    "InvokeScript":  [
+                                                         "\r\n      New-Item -Path \"HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" -Name \"InprocServer32\" -force -value \"\"\r\n      Write-Host Restarting explorer.exe ...\r\n      Stop-Process -Name \"explorer\" -Force\r\n      "
+                                                     ],
+                                    "UndoScript":  [
+                                                       "\r\n      Remove-Item -Path \"HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" -Recurse -Confirm:$false -Force\r\n      # Restarting Explorer in the Undo Script might not be necessary, as the Registry change without restarting Explorer does work, but just to make sure.\r\n      Write-Host Restarting explorer.exe ...\r\n      Stop-Process -Name \"explorer\" -Force\r\n      "
+                                                   ],
+                                    "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/rightclickmenu"
+                                },
+    "WPFTweaksDiskCleanup":  {
+                                 "Content":  "运行磁盘清理",
+                                 "Description":  "在驱动器 C: 上运行磁盘清理并删除旧的 Windows 更新。",
+                                 "category":  "基础调整",
+                                 "panel":  "1",
+                                 "InvokeScript":  [
+                                                      "\r\n      cleanmgr.exe /d C: /VERYLOWDISK\r\n      Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase\r\n      "
+                                                  ],
+                                 "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/diskcleanup"
+                             },
+    "WPFTweaksDeleteTempFiles":  {
+                                     "Content":  "删除临时文件",
+                                     "Description":  "删除 TEMP 文件夹。",
+                                     "category":  "基础调整",
+                                     "panel":  "1",
+                                     "InvokeScript":  [
+                                                          "\r\n      Remove-Item -Path \"$Env:Temp\\*\" -Recurse -Force\r\n      Remove-Item -Path \"$Env:SystemRoot\\Temp\\*\" -Recurse -Force\r\n      "
+                                                      ],
+                                     "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/deletetempfiles"
+                                 },
+    "WPFTweaksIPv46":  {
+                           "Content":  "优先选择 IPv4 而不是 IPv6",
+                           "Description":  "设置 IPv4 首选项可以在未配置 IPv6 的专用网络上带来延迟和安全优势。",
+                           "category":  "z__Advanced Tweaks - CAUTION",
+                           "panel":  "1",
+                           "registry":  [
+                                            {
+                                                "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                                                "Name":  "DisabledComponents",
+                                                "Value":  "32",
+                                                "Type":  "DWord",
+                                                "OriginalValue":  "0"
+                                            }
+                                        ],
+                           "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/ipv46"
+                       },
+    "WPFTweaksTeredo":  {
+                            "Content":  "禁用 Teredo",
+                            "Description":  "Teredo 网络隧道是一项 IPv6 功能，可能会导致额外的延迟，但可能会导致某些游戏出现问题。",
+                            "category":  "z__Advanced Tweaks - CAUTION",
+                            "panel":  "1",
+                            "registry":  [
+                                             {
+                                                 "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                                                 "Name":  "DisabledComponents",
+                                                 "Value":  "1",
+                                                 "Type":  "DWord",
+                                                 "OriginalValue":  "0"
+                                             }
+                                         ],
+                            "InvokeScript":  [
+                                                 "netsh interface teredo set state disabled"
+                                             ],
+                            "UndoScript":  [
+                                               "netsh interface teredo set state default"
+                                           ],
+                            "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/teredo"
+                        },
+    "WPFTweaksDisableIPv6":  {
+                                 "Content":  "禁用 IPv6",
+                                 "Description":  "禁用 IPv6。",
+                                 "category":  "z__Advanced Tweaks - CAUTION",
+                                 "panel":  "1",
+                                 "registry":  [
+                                                  {
+                                                      "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+                                                      "Name":  "DisabledComponents",
+                                                      "Value":  "255",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "0"
+                                                  }
+                                              ],
+                                 "InvokeScript":  [
+                                                      "Disable-NetAdapterBinding -Name * -ComponentID ms_tcpip6"
+                                                  ],
+                                 "UndoScript":  [
+                                                    "Enable-NetAdapterBinding -Name * -ComponentID ms_tcpip6"
+                                                ],
+                                 "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/disableipv6"
+                             },
+    "WPFTweaksDisableBGapps":  {
+                                   "Content":  "禁用后台应用程序",
+                                   "Description":  "禁止所有 Microsoft Store 应用程序在后台运行，从 Windows 11 开始，这必须单独完成。",
+                                   "category":  "z__Advanced Tweaks - CAUTION",
+                                   "panel":  "1",
+                                   "registry":  [
+                                                    {
+                                                        "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications",
+                                                        "Name":  "GlobalUserDisabled",
+                                                        "Value":  "1",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "0"
+                                                    }
+                                                ],
+                                   "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/disablebgapps"
+                               },
+    "WPFTweaksDisableFSO":  {
+                                "Content":  "禁用全屏优化",
+                                "Description":  "在所有应用程序中禁用 FSO。注意：这将禁用独占全屏中的颜色管理。",
+                                "category":  "z__Advanced Tweaks - CAUTION",
+                                "panel":  "1",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKCU:\\System\\GameConfigStore",
+                                                     "Name":  "GameDVR_DXGIHonorFSEWindowsCompatible",
+                                                     "Value":  "1",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "0"
+                                                 }
+                                             ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/disablefso"
+                            },
+    "WPFToggleDarkMode":  {
+                              "Content":  "Windows 的深色主题",
+                              "Description":  "启用/禁用深色模式。",
+                              "category":  "Customize Preferences",
+                              "panel":  "2",
+                              "Type":  "Toggle",
+                              "registry":  [
+                                               {
+                                                   "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                                                   "Name":  "AppsUseLightTheme",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "1",
+                                                   "DefaultState":  "false"
+                                               },
+                                               {
+                                                   "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                                                   "Name":  "SystemUsesLightTheme",
+                                                   "Value":  "0",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "1",
+                                                   "DefaultState":  "false"
+                                               }
+                                           ],
+                              "InvokeScript":  [
+                                                   "\r\n      Invoke-WinUtilExplorerUpdate\r\n      if ($sync.ThemeButton.Content -eq [char]0xF08C) {\r\n        Invoke-WinutilThemeChange -theme \"Auto\"\r\n      }\r\n      "
+                                               ],
+                              "UndoScript":  [
+                                                 "\r\n      Invoke-WinUtilExplorerUpdate\r\n      if ($sync.ThemeButton.Content -eq [char]0xF08C) {\r\n        Invoke-WinutilThemeChange -theme \"Auto\"\r\n      }\r\n      "
+                                             ],
+                              "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/darkmode"
+                          },
+    "WPFToggleBingSearch":  {
+                                "Content":  "开始菜单中的 Bing 搜索",
+                                "Description":  "如果启用，Bing 网络搜索结果将包含在您的“开始”菜单搜索中。",
+                                "category":  "Customize Preferences",
+                                "panel":  "2",
+                                "Type":  "Toggle",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                                                     "Name":  "BingSearchEnabled",
+                                                     "Value":  "1",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "0",
+                                                     "DefaultState":  "true"
+                                                 }
+                                             ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/bingsearch"
+                            },
+    "WPFToggleStandbyFix":  {
+                                "Content":  "现代待机修复",
+                                "Description":  "在 S0 睡眠期间禁用网络连接。如果在 S0 睡眠期间打开网络连接，可能会导致现代笔记本电脑过热",
+                                "category":  "Customize Preferences",
+                                "panel":  "2",
+                                "Type":  "Toggle",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKCU:\\SOFTWARE\\Policies\\Microsoft\\Power\\PowerSettings\\f15576e8-98b7-4186-b944-eafa664402d9",
+                                                     "Name":  "ACSettingIndex",
+                                                     "Value":  "0",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "\u003cRemoveEntry\u003e",
+                                                     "DefaultState":  "true"
+                                                 }
+                                             ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/standbyfix"
+                            },
+    "WPFToggleNumLock":  {
+                             "Content":  "启动时的数字锁定",
+                             "Description":  "计算机启动时切换 Num Lock 键状态。",
+                             "category":  "Customize Preferences",
+                             "panel":  "2",
+                             "Type":  "Toggle",
+                             "registry":  [
+                                              {
+                                                  "Path":  "HKU:\\.Default\\Control Panel\\Keyboard",
+                                                  "Name":  "InitialKeyboardIndicators",
+                                                  "Value":  "2",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "0",
+                                                  "DefaultState":  "false"
+                                              },
+                                              {
+                                                  "Path":  "HKCU:\\Control Panel\\Keyboard",
+                                                  "Name":  "InitialKeyboardIndicators",
+                                                  "Value":  "2",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "0",
+                                                  "DefaultState":  "false"
+                                              }
+                                          ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/numlock"
+                         },
+    "WPFToggleVerboseLogon":  {
+                                  "Content":  "登录期间的详细消息",
+                                  "Description":  "在登录过程中显示详细消息以进行故障排除和诊断。",
+                                  "category":  "Customize Preferences",
+                                  "panel":  "2",
+                                  "Type":  "Toggle",
+                                  "registry":  [
+                                                   {
+                                                       "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                       "Name":  "VerboseStatus",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "0",
+                                                       "DefaultState":  "false"
+                                                   }
+                                               ],
+                                  "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/verboselogon"
+                              },
+    "WPFToggleStartMenuRecommendations":  {
+                                              "Content":  "开始菜单中的推荐",
+                                              "Description":  "如果禁用，您将不会在“开始”菜单中看到推荐。警告：这还会产生副作用，禁用锁定屏幕上的 Windows Spotlight。",
+                                              "category":  "Customize Preferences",
+                                              "panel":  "2",
+                                              "Type":  "Toggle",
+                                              "registry":  [
+                                                               {
+                                                                   "Path":  "HKLM:\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Start",
+                                                                   "Name":  "HideRecommendedSection",
+                                                                   "Value":  "0",
+                                                                   "Type":  "DWord",
+                                                                   "OriginalValue":  "1",
+                                                                   "DefaultState":  "true"
+                                                               },
+                                                               {
+                                                                   "Path":  "HKLM:\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Education",
+                                                                   "Name":  "IsEducationEnvironment",
+                                                                   "Value":  "0",
+                                                                   "Type":  "DWord",
+                                                                   "OriginalValue":  "1",
+                                                                   "DefaultState":  "true"
+                                                               },
+                                                               {
+                                                                   "Path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+                                                                   "Name":  "HideRecommendedSection",
+                                                                   "Value":  "0",
+                                                                   "Type":  "DWord",
+                                                                   "OriginalValue":  "1",
+                                                                   "DefaultState":  "true"
+                                                               }
+                                                           ],
+                                              "InvokeScript":  [
+                                                                   "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                               ],
+                                              "UndoScript":  [
+                                                                 "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                             ],
+                                              "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/startmenurecommendations"
+                                          },
+    "WPFToggleHideSettingsHome":  {
+                                      "Content":  "删除设置主页",
+                                      "Description":  "删除 Windows 设置应用程序中的主页。",
+                                      "category":  "Customize Preferences",
+                                      "panel":  "2",
+                                      "Type":  "Toggle",
+                                      "registry":  [
+                                                       {
+                                                           "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                                           "Name":  "SettingsPageVisibility",
+                                                           "Value":  "hide:home",
+                                                           "Type":  "String",
+                                                           "OriginalValue":  "show:home",
+                                                           "DefaultState":  "false"
+                                                       }
+                                                   ],
+                                      "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/hidesettingshome"
+                                  },
+    "WPFToggleMouseAcceleration":  {
+                                       "Content":  "鼠标加速",
+                                       "Description":  "如果启用，光标移动会受到物理鼠标移动速度的影响。",
+                                       "category":  "Customize Preferences",
+                                       "panel":  "2",
+                                       "Type":  "Toggle",
+                                       "registry":  [
+                                                        {
+                                                            "Path":  "HKCU:\\Control Panel\\Mouse",
+                                                            "Name":  "MouseSpeed",
+                                                            "Value":  "1",
+                                                            "Type":  "DWord",
+                                                            "OriginalValue":  "0",
+                                                            "DefaultState":  "true"
+                                                        },
+                                                        {
+                                                            "Path":  "HKCU:\\Control Panel\\Mouse",
+                                                            "Name":  "MouseThreshold1",
+                                                            "Value":  "6",
+                                                            "Type":  "DWord",
+                                                            "OriginalValue":  "0",
+                                                            "DefaultState":  "true"
+                                                        },
+                                                        {
+                                                            "Path":  "HKCU:\\Control Panel\\Mouse",
+                                                            "Name":  "MouseThreshold2",
+                                                            "Value":  "10",
+                                                            "Type":  "DWord",
+                                                            "OriginalValue":  "0",
+                                                            "DefaultState":  "true"
+                                                        }
+                                                    ],
+                                       "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/mouseacceleration"
+                                   },
+    "WPFToggleStickyKeys":  {
+                                "Content":  "粘滞键",
+                                "Description":  "如果启用，粘滞键将被激活。粘滞键是某些图形用户界面的辅助功能，可帮助身体残疾的用户或帮助用户减少重复性劳损。",
+                                "category":  "Customize Preferences",
+                                "panel":  "2",
+                                "Type":  "Toggle",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKCU:\\Control Panel\\Accessibility\\StickyKeys",
+                                                     "Name":  "Flags",
+                                                     "Value":  "506",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "58",
+                                                     "DefaultState":  "true"
+                                                 }
+                                             ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/stickykeys"
+                            },
+    "WPFToggleNewOutlook":  {
+                                "Content":  "新展望",
+                                "Description":  "如果禁用，它将删除新的 Outlook 切换，禁用新的 Outlook 迁移，并确保使用经典 Outlook 应用程序。",
+                                "category":  "Customize Preferences",
+                                "panel":  "2",
+                                "Type":  "Toggle",
+                                "registry":  [
+                                                 {
+                                                     "Path":  "HKCU:\\SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Preferences",
+                                                     "Name":  "UseNewOutlook",
+                                                     "Value":  "1",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "0",
+                                                     "DefaultState":  "true"
+                                                 },
+                                                 {
+                                                     "Path":  "HKCU:\\Software\\Microsoft\\Office\\16.0\\Outlook\\Options\\General",
+                                                     "Name":  "HideNewOutlookToggle",
+                                                     "Value":  "0",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "1",
+                                                     "DefaultState":  "true"
+                                                 },
+                                                 {
+                                                     "Path":  "HKCU:\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Options\\General",
+                                                     "Name":  "DoNewOutlookAutoMigration",
+                                                     "Value":  "0",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "0",
+                                                     "DefaultState":  "false"
+                                                 },
+                                                 {
+                                                     "Path":  "HKCU:\\Software\\Policies\\Microsoft\\Office\\16.0\\Outlook\\Preferences",
+                                                     "Name":  "NewOutlookMigrationUserSetting",
+                                                     "Value":  "0",
+                                                     "Type":  "DWord",
+                                                     "OriginalValue":  "\u003cRemoveEntry\u003e",
+                                                     "DefaultState":  "true"
+                                                 }
+                                             ],
+                                "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/newoutlook"
+                            },
+    "WPFToggleMultiplaneOverlay":  {
+                                       "Content":  "禁用多平面叠加",
+                                       "Description":  "禁用多平面覆盖，这有时会导致显卡出现问题。",
+                                       "category":  "Customize Preferences",
+                                       "panel":  "2",
+                                       "Type":  "Toggle",
+                                       "registry":  [
+                                                        {
+                                                            "Path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+                                                            "Name":  "OverlayTestMode",
+                                                            "Value":  "5",
+                                                            "Type":  "DWord",
+                                                            "OriginalValue":  "\u003cRemoveEntry\u003e",
+                                                            "DefaultState":  "false"
+                                                        }
+                                                    ],
+                                       "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/multiplaneoverlay"
+                                   },
+    "WPFToggleHiddenFiles":  {
+                                 "Content":  "显示隐藏文件",
+                                 "Description":  "如果启用，将显示隐藏文件。",
+                                 "category":  "Customize Preferences",
+                                 "panel":  "2",
+                                 "Type":  "Toggle",
+                                 "registry":  [
+                                                  {
+                                                      "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                      "Name":  "Hidden",
+                                                      "Value":  "1",
+                                                      "Type":  "DWord",
+                                                      "OriginalValue":  "0",
+                                                      "DefaultState":  "false"
+                                                  }
+                                              ],
+                                 "InvokeScript":  [
+                                                      "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                  ],
+                                 "UndoScript":  [
+                                                    "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                ],
+                                 "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/hiddenfiles"
+                             },
+    "WPFToggleShowExt":  {
+                             "Content":  "显示文件扩展名",
+                             "Description":  "如果启用，文件扩展名（例如 .txt、.jpg）可见。",
+                             "category":  "Customize Preferences",
+                             "panel":  "2",
+                             "Type":  "Toggle",
+                             "registry":  [
+                                              {
+                                                  "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                  "Name":  "HideFileExt",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "1",
+                                                  "DefaultState":  "false"
+                                              }
+                                          ],
+                             "InvokeScript":  [
+                                                  "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                              ],
+                             "UndoScript":  [
+                                                "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                            ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/showext"
+                         },
+    "WPFToggleTaskbarSearch":  {
+                                   "Content":  "任务栏中的搜索按钮",
+                                   "Description":  "如果启用，搜索按钮将位于任务栏上。",
+                                   "category":  "Customize Preferences",
+                                   "panel":  "2",
+                                   "Type":  "Toggle",
+                                   "registry":  [
+                                                    {
+                                                        "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                                                        "Name":  "SearchboxTaskbarMode",
+                                                        "Value":  "1",
+                                                        "Type":  "DWord",
+                                                        "OriginalValue":  "0",
+                                                        "DefaultState":  "true"
+                                                    }
+                                                ],
+                                   "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/taskbarsearch"
+                               },
+    "WPFToggleTaskView":  {
+                              "Content":  "任务栏中的任务视图按钮",
+                              "Description":  "如果启用，任务栏中将显示任务视图按钮。",
+                              "category":  "Customize Preferences",
+                              "panel":  "2",
+                              "Type":  "Toggle",
+                              "registry":  [
+                                               {
+                                                   "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                   "Name":  "ShowTaskViewButton",
+                                                   "Value":  "1",
+                                                   "Type":  "DWord",
+                                                   "OriginalValue":  "0",
+                                                   "DefaultState":  "true"
+                                               }
+                                           ],
+                              "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/taskview"
+                          },
+    "WPFToggleTaskbarAlignment":  {
+                                      "Content":  "中心任务栏项目",
+                                      "Description":  "[Windows 11] 如果启用，任务栏项目将显示在中心，否则任务栏项目将显示在左侧。",
+                                      "category":  "Customize Preferences",
+                                      "panel":  "2",
+                                      "Type":  "Toggle",
+                                      "registry":  [
+                                                       {
+                                                           "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                                           "Name":  "TaskbarAl",
+                                                           "Value":  "1",
+                                                           "Type":  "DWord",
+                                                           "OriginalValue":  "0",
+                                                           "DefaultState":  "true"
+                                                       }
+                                                   ],
+                                      "InvokeScript":  [
+                                                           "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                       ],
+                                      "UndoScript":  [
+                                                         "\r\n      Invoke-WinUtilExplorerUpdate -action \"restart\"\r\n      "
+                                                     ],
+                                      "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/taskbaralignment"
+                                  },
+    "WPFToggleDetailedBSoD":  {
+                                  "Content":  "详细的BSoD",
+                                  "Description":  "如果启用，您将看到详细的蓝屏死机 (BSOD) 以及更多信息。",
+                                  "category":  "Customize Preferences",
+                                  "panel":  "2",
+                                  "Type":  "Toggle",
+                                  "registry":  [
+                                                   {
+                                                       "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                                                       "Name":  "DisplayParameters",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "0",
+                                                       "DefaultState":  "false"
+                                                   },
+                                                   {
+                                                       "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+                                                       "Name":  "DisableEmoticon",
+                                                       "Value":  "1",
+                                                       "Type":  "DWord",
+                                                       "OriginalValue":  "0",
+                                                       "DefaultState":  "false"
+                                                   }
+                                               ],
+                                  "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/detailedbsod"
+                              },
+    "WPFToggleS3Sleep":  {
+                             "Content":  "S3睡眠",
+                             "Description":  "在现代待机和 S3 睡眠之间切换。",
+                             "category":  "Customize Preferences",
+                             "panel":  "2",
+                             "Type":  "Toggle",
+                             "registry":  [
+                                              {
+                                                  "Path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                                                  "Name":  "PlatformAoAcOverride",
+                                                  "Value":  "0",
+                                                  "Type":  "DWord",
+                                                  "OriginalValue":  "\u003cRemoveEntry\u003e",
+                                                  "DefaultState":  "false"
+                                              }
+                                          ],
+                             "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/s3sleep"
+                         },
+    "WPFOOSUbutton":  {
+                          "Content":  "运行 OO 关闭 10",
+                          "category":  "z__Advanced Tweaks - CAUTION",
+                          "panel":  "1",
+                          "Type":  "Button",
+                          "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/oosubutton"
+                      },
+    "WPFchangedns":  {
+                         "Content":  "域名系统",
+                         "category":  "z__Advanced Tweaks - CAUTION",
+                         "panel":  "1",
+                         "Type":  "Combobox",
+                         "ComboItems":  "Default DHCP Google Cloudflare Cloudflare_Malware Cloudflare_Malware_Adult Open_DNS Quad9 AdGuard_Ads_Trackers AdGuard_Ads_Trackers_Malware_Adult",
+                         "link":  "https://winutil.christitus.com/dev/tweaks/z--advanced-tweaks---caution/changedns"
+                     },
+    "WPFAddUltPerf":  {
+                          "Content":  "添加并激活终极性能配置文件",
+                          "category":  "Performance Plans",
+                          "panel":  "2",
+                          "Type":  "Button",
+                          "ButtonWidth":  "300",
+                          "link":  "https://winutil.christitus.com/dev/tweaks/performance-plans/addultperf"
+                      },
+    "WPFRemoveUltPerf":  {
+                             "Content":  "删除终极性能配置文件",
+                             "category":  "Performance Plans",
+                             "panel":  "2",
+                             "Type":  "Button",
+                             "ButtonWidth":  "300",
+                             "link":  "https://winutil.christitus.com/dev/tweaks/performance-plans/removeultperf"
+                         },
+    "WPFTweaksDisableExplorerAutoDiscovery":  {
+                                                  "Content":  "禁用资源管理器自动文件夹发现",
+                                                  "Description":  "Windows 资源管理器会自动尝试根据文件夹的内容猜测文件夹的类型，从而降低浏览体验。警告！将禁用文件资源管理器分组。",
+                                                  "category":  "基础调整",
+                                                  "panel":  "1",
+                                                  "InvokeScript":  [
+                                                                       "\r\n      # Previously detected folders\r\n      $bags = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\"\r\n\r\n      # Folder types lookup table\r\n      $bagMRU = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\"\r\n\r\n      # Flush Explorer view database\r\n      Remove-Item -Path $bags -Recurse -Force\r\n      Write-Host \"Removed $bags\"\r\n\r\n      Remove-Item -Path $bagMRU -Recurse -Force\r\n      Write-Host \"Removed $bagMRU\"\r\n\r\n      # Every folder\r\n      $allFolders = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\\AllFolders\\Shell\"\r\n\r\n      if (!(Test-Path $allFolders)) {\r\n        New-Item -Path $allFolders -Force\r\n        Write-Host \"Created $allFolders\"\r\n      }\r\n\r\n      # Generic view\r\n      New-ItemProperty -Path $allFolders -Name \"FolderType\" -Value \"NotSpecified\" -PropertyType String -Force\r\n      Write-Host \"Set FolderType to NotSpecified\"\r\n\r\n      Write-Host Please sign out and back in, or restart your computer to apply the changes!\r\n      "
+                                                                   ],
+                                                  "UndoScript":  [
+                                                                     "\r\n      # Previously detected folders\r\n      $bags = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\"\r\n\r\n      # Folder types lookup table\r\n      $bagMRU = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\"\r\n\r\n      # Flush Explorer view database\r\n      Remove-Item -Path $bags -Recurse -Force\r\n      Write-Host \"Removed $bags\"\r\n\r\n      Remove-Item -Path $bagMRU -Recurse -Force\r\n      Write-Host \"Removed $bagMRU\"\r\n\r\n      Write-Host Please sign out and back in, or restart your computer to apply the changes!\r\n      "
+                                                                 ],
+                                                  "link":  "https://winutil.christitus.com/dev/tweaks/essential-tweaks/disableexplorerautodiscovery"
+                                              },
+    "WPFToggleDisableCrossDeviceResume":  {
+                                              "Content":  "跨设备简历",
+                                              "Description":  "此调整控制 Windows 11 24H2 及更高版本中的恢复功能，允许您从移动设备恢复活动，反之亦然。",
+                                              "category":  "Customize Preferences",
+                                              "panel":  "2",
+                                              "Type":  "Toggle",
+                                              "registry":  [
+                                                               {
+                                                                   "Path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+                                                                   "Name":  "IsResumeAllowed",
+                                                                   "Value":  "1",
+                                                                   "Type":  "DWord",
+                                                                   "OriginalValue":  "0",
+                                                                   "DefaultState":  "true"
+                                                               }
+                                                           ],
+                                              "link":  "https://winutil.christitus.com/dev/tweaks/customize-preferences/disablecrossdeviceresume"
+                                          }
+}
+'@ | ConvertFrom-Json
 $inputXML = @'
 <Window x:Class="WinUtility.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -14425,7 +17430,7 @@ $inputXML = @'
                 <StackPanel Name="NavLogoPanel" Orientation="Horizontal" HorizontalAlignment="Left" Background="{DynamicResource MainBackgroundColor}" SnapsToDevicePixels="True" Margin="10,0,20,0">
                 </StackPanel>
                 <ToggleButton Margin="0,0,5,0" Height="{DynamicResource TabButtonHeight}" Width="{DynamicResource TabButtonWidth}"
-                    Background="{DynamicResource ButtonInstallBackgroundColor}" Foreground="white" FontWeight="Bold" Name="WPFTab1BT">
+                    Background="{DynamicResource ButtonInstallBackgroundColor}" Foreground="{DynamicResource ButtonInstallForegroundColor}" FontWeight="Bold" Name="WPFTab1BT">
                     <ToggleButton.Content>
                         <TextBlock FontSize="{DynamicResource TabButtonFontSize}" Background="Transparent" Foreground="{DynamicResource ButtonInstallForegroundColor}" >
                             安装
@@ -14699,12 +17704,12 @@ $inputXML = @'
                             </Grid.RowDefinitions>
 
                             <StackPanel Background="{DynamicResource MainBackgroundColor}" Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
-                                <Label Content="Recommended Selections:" FontSize="{DynamicResource FontSize}" VerticalAlignment="Center" Margin="2"/>
+                                <Label Content="推荐选项：" FontSize="{DynamicResource FontSize}" VerticalAlignment="Center" Margin="2"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,2,0,0">
-                                    <Button Name="WPFstandard" Content=" Standard " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
-                                    <Button Name="WPFminimal" Content=" Minimal " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
-                                    <Button Name="WPFClearTweaksSelection" Content=" Clear " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
-                                    <Button Name="WPFGetInstalledTweaks" Content=" Get Installed Tweaks " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                                    <Button Name="WPFstandard" Content=" 标准 " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                                    <Button Name="WPFminimal" Content=" 最小 " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                                    <Button Name="WPFClearTweaksSelection" Content=" 清除 " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                                    <Button Name="WPFGetInstalledTweaks" Content=" 获取已安装调整 " Margin="2" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
                                 </StackPanel>
                             </StackPanel>
 
@@ -14724,8 +17729,8 @@ $inputXML = @'
                     </ScrollViewer>
                     <Border Grid.Row="1" Background="{DynamicResource MainBackgroundColor}" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Stretch" Padding="10">
                         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                            <Button Name="WPFTweaksbutton" Content="Run Tweaks" Margin="5" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
-                            <Button Name="WPFUndoall" Content="Undo Selected Tweaks" Margin="5" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                            <Button Name="WPFTweaksbutton" Content="运行调整" Margin="5" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
+                            <Button Name="WPFUndoall" Content="撤销所选调整" Margin="5" Width="{DynamicResource ButtonWidth}" Height="{DynamicResource ButtonHeight}"/>
                         </WrapPanel>
                     </Border>
                 </Grid>
